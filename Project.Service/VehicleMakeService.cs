@@ -10,22 +10,17 @@ namespace Project.Service
     public class VehicleMakeService : IVehicleMakeService
 
     {
-        private readonly IUnitOfWork Repository;
+
+        #region Costructors
         public VehicleMakeService(IUnitOfWork repository)
         {
             this.Repository = repository;
         }
+        #endregion Constructors
 
-        //#region Costructors
-        //public VehicleMakeService(IUnitOfWork repository)
-        //{
-        //    this.Repository = repository;
-        //}
-        //#endregion Constructors
-
-        //#region Properties
-        //protected IUnitOfWork Repository { get; set; }
-        //#endregion Properties
+        #region Properties
+        protected IUnitOfWork Repository { get; set; }
+        #endregion Properties
 
         #region Metodhs
 

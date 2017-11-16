@@ -13,8 +13,8 @@ namespace Project.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        protected VehicleContext DbContext { get; set; }
 
+        #region Costructor
         public UnitOfWork(VehicleContext dbContext)
         {
             if (dbContext == null)
@@ -23,8 +23,14 @@ namespace Project.Repository
             }
             DbContext = dbContext;
         }
+        #endregion Contructor
 
-        public  async Task<IEnumerable<IVehicleMake>> GetAllVehicleMake()
+        #region Properties
+        protected VehicleContext DbContext { get; set; }
+        #endregion Properties
+
+        #region Method
+        public async Task<IEnumerable<IVehicleMake>> GetAllVehicleMake()
         {
             var model = from s in DbContext.VehicleMakeEntities select s;
 
@@ -59,11 +65,13 @@ namespace Project.Repository
                 result = await DbContext.SaveChangesAsync();
                 scope.Complete();
             }
-            return result;   
+            return result;
         }
         public void Dispose()
         {
             DbContext.Dispose();
         }
+        #endregion Mehod
+
     }
 }
