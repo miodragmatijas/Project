@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html ng-app="VehicleModule">
+
+<head>   
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="app/vehicleModule.js"></script>
+    <script src="app/vehiclemake/vehicleMakeService.js"></script>
+    <script src="app/vehiclemake/vehicleMakeController.js"></script>
+</head>
+
+<body>
+
+    <h2>VehicleMake List</h2><h1></h1><br />
+
+    <div ng-controller="VehicleMakeController">
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>ABRV</th>
+            </tr>
+
+            <tbody ng-repeat="sub in vehicleMake">
+                <tr>
+                    <td>{{sub.ID}}</td>
+                    <td>{{sub.Name}}</td>
+                    <td>{{sub.Abrv}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
+
