@@ -11,9 +11,10 @@ namespace WebAPI.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Project.Service.Common;
-    using Project.Service;
     using System.Web.Http;
-    using WebApiContrib.IoC.Ninject;
+    
+    
+    
 
     public static class NinjectWebCommon 
     {
@@ -52,7 +53,8 @@ namespace WebAPI.App_Start
                 
 
                 RegisterServices(kernel);
-                GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
+                GlobalConfiguration.Configuration.DependencyResolver = new WebApiContrib.IoC.Ninject.NinjectResolver(kernel);
+                //GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
                 return kernel;
             }
             catch
@@ -68,8 +70,13 @@ namespace WebAPI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IVehicleMakeService>().To<VehicleMakeService>();
+            kernel.Bind<IVehicleMakeService>().To<Project.Service.VehicleMakeService>();
+
             kernel.Bind<Project.Repository.Common.IUnitOfWork>().To<Project.Repository.UnitOfWork>();
+            //kernel.Bind<Project.Model.Common.IVehicleMake>().To<Project.Model.VehicleMake>();
+            
+            
+            
         }        
     }
 }

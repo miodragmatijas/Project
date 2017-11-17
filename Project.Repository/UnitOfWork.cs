@@ -30,11 +30,10 @@ namespace Project.Repository
         #endregion Properties
 
         #region Method
-        public async Task<IEnumerable<IVehicleMake>> GetAllVehicleMake()
+        public async Task<IEnumerable<T>> GetAll<T>() where T:class
         {
-            var model = from s in DbContext.VehicleMakeEntities select s;
-
-            return await model.ToListAsync();
+            var response = await DbContext.Set<T>().ToListAsync();
+            return response;
         }
 
         //public Task<int> AddAsync<T>(T entity) where T : class
@@ -57,20 +56,25 @@ namespace Project.Repository
         //        throw e;
         //    }
         //}
-        public async Task<int> CommitAsync()
-        {
-            int result = 0;
-            using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                result = await DbContext.SaveChangesAsync();
-                scope.Complete();
-            }
-            return result;
-        }
-        public void Dispose()
-        {
-            DbContext.Dispose();
-        }
+        //public async Task<int> CommitAsync()
+        //{
+        //    int result = 0;
+        //    using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+        //    {
+        //        result = await DbContext.SaveChangesAsync();
+        //        scope.Complete();
+        //    }
+        //    return result;
+        //}
+        //public void Dispose()
+        //{
+        //    //DbContext.Dispose();
+        //}
+
+        //public Task<IEnumerable<T>> GetAll<T>() where T : class
+        //{
+        //    throw new NotImplementedException();
+        //}
         #endregion Mehod
 
     }

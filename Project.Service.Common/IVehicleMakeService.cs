@@ -9,6 +9,6 @@ namespace Project.Service.Common
 {
     public interface IVehicleMakeService
     {
-        Task<IEnumerable<IVehicleMake>> GetAllVehicleMake();
+        Task<IEnumerable<IVehicleMake>> GetAll();
     }
 }

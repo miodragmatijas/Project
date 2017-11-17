@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Project.Repository.Common;
 using Project.Model.Common;
-
+using Project.Model;
 
 namespace Project.Service
 {
@@ -24,10 +24,13 @@ namespace Project.Service
 
         #region Metodhs
 
-        public async Task<IEnumerable<IVehicleMake>> GetAllVehicleMake()
+        public async Task<IEnumerable<IVehicleMake>> GetAll()
         {
-            return await Repository.GetAllVehicleMake();
+            var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(await Repository.GetAll<VehicleMake>());
+
+            return dataVehicle;
         }
+       
 
         #endregion Metodhs
 

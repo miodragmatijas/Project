@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
+using WebAPI.Views;
 
 namespace WebAPI.Controllers
 {
@@ -22,13 +23,12 @@ namespace WebAPI.Controllers
             _VehicleMakeService = vehicleMakeService;
         }
 
-
         //// GET: api/Vehicle
         public  async  Task<HttpResponseMessage> GetAsync()
         {
-            var model = await _VehicleMakeService.GetAllVehicleMake();           
-           
-                return Request.CreateResponse(model);                      
+            var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(await _VehicleMakeService.GetAll());     
+                       
+            return Request.CreateResponse(HttpStatusCode.OK, model);                      
         }     
         
         /*

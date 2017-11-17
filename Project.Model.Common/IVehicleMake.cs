@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 
+
 namespace Project.Model.Common
 {
+   
     public interface IVehicleMake
     {
         #region Properties

@@ -1,5 +1,8 @@
-﻿using Ninject;
+﻿using AutoMapper;
+using Ninject;
 using Ninject.Web.Mvc;
+using Project.Model;
+using Project.Model.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +24,7 @@ namespace WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-           
+            Mapper.Initialize(config: cfg => { cfg.CreateMap<VehicleMake, IVehicleMake>(); cfg.CreateMap<VehicleModel, IVehicleModel>(); });
         }
         
     }
