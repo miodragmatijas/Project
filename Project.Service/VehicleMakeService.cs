@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Project.Repository.Common;
 using Project.Model.Common;
 using Project.Model;
+using System;
 
 namespace Project.Service
 {
@@ -30,7 +31,16 @@ namespace Project.Service
 
             return dataVehicle;
         }
-       
+
+        public async Task<IVehicleMake> FindById(int id)
+        {
+            var dataVehicle = AutoMapper.Mapper.Map<IVehicleMake>(await Repository.GetIdAsync<VehicleMake>(id));
+
+            return dataVehicle;
+
+        }
+
+
 
         #endregion Metodhs
 

@@ -36,6 +36,12 @@ namespace Project.Repository
             return response;
         }
 
+        public async Task<T> GetIdAsync<T>(int id) where T : class
+        {
+            var data = await DbContext.Set<T>().FindAsync(id);
+            return data;
+        }
+
         //public Task<int> AddAsync<T>(T entity) where T : class
         //{
         //    try
@@ -56,6 +62,9 @@ namespace Project.Repository
         //        throw e;
         //    }
         //}
+
+
+
         //public async Task<int> CommitAsync()
         //{
         //    int result = 0;
@@ -71,10 +80,7 @@ namespace Project.Repository
         //    //DbContext.Dispose();
         //}
 
-        //public Task<IEnumerable<T>> GetAll<T>() where T : class
-        //{
-        //    throw new NotImplementedException();
-        //}
+
         #endregion Mehod
 
     }

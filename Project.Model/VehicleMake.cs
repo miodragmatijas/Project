@@ -1,10 +1,11 @@
 ﻿using Project.Model.Common;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Project.Model
 {
-    [KnownType(typeof(VehicleMake))]
+    //[KnownType(typeof(VehicleMake))]
     public class VehicleMake : IVehicleMake
     {
         #region Properties

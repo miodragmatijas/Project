@@ -24,21 +24,20 @@ namespace WebAPI.Controllers
         }
 
         //// GET: api/Vehicle
-        public  async  Task<HttpResponseMessage> GetAsync()
+        public async Task<HttpResponseMessage> GetAsync()
         {
-            var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(await _VehicleMakeService.GetAll());     
-                       
-            return Request.CreateResponse(HttpStatusCode.OK, model);                      
-        }     
-        
-        /*
-        
-        // GET: api/Vehicle/5
-        public string Get(int id)
-        {
-            return "value";
+            var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(await _VehicleMakeService.GetAll());
+            return Request.CreateResponse(HttpStatusCode.OK, model);
         }
 
+        // GET: api/Vehicle/5
+        public async Task<HttpResponseMessage> GetId(int id)
+        {
+            var model = AutoMapper.Mapper.Map<VehicleMakeView>(await _VehicleMakeService.FindById(id));
+            return Request.CreateResponse(HttpStatusCode.OK, model);
+        }
+
+        /*
         // POST: api/Vehicle
         public void Post([FromBody]string value)
         {

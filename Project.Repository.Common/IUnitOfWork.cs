@@ -17,5 +17,6 @@ namespace Project.Repository.Common
         //Task<IEnumerable <IVehicleMake>> GetAllVehicleMake();
 
         Task<IEnumerable<T>> GetAll<T>() where T : class;
+        Task<T> GetIdAsync<T>(int id) where T : class;
     }
 }
