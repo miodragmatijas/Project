@@ -1,14 +1,9 @@
-﻿using Project.Model.Common;
-using Project.Service;
-using Project.Service.Common;
-using System;
+﻿using Project.Service.Common;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Mvc;
 using WebAPI.Views;
 
 namespace WebAPI.Controllers
@@ -23,7 +18,8 @@ namespace WebAPI.Controllers
             _VehicleMakeService = vehicleMakeService;
         }
 
-        //// GET: api/Vehicle
+        // GET: api/Vehicle
+        [HttpGet]
         public async Task<HttpResponseMessage> GetAsync()
         {
             var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(await _VehicleMakeService.GetAll());
@@ -31,11 +27,22 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Vehicle/5
+        [HttpGet]
         public async Task<HttpResponseMessage> GetId(int id)
         {
             var model = AutoMapper.Mapper.Map<VehicleMakeView>(await _VehicleMakeService.FindById(id));
             return Request.CreateResponse(HttpStatusCode.OK, model);
         }
+
+
+        // DELETE: api/Vehicle/5
+        [HttpDelete]
+        public async Task<HttpResponseMessage> Delete(int id)
+        {
+            await _VehicleMakeService.Delete(id);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
 
         /*
         // POST: api/Vehicle
@@ -48,10 +55,7 @@ namespace WebAPI.Controllers
         {
         }
 
-        // DELETE: api/Vehicle/5
-        public void Delete(int id)
-        {
-        }
+       
 
        */
     }

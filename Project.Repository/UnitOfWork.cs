@@ -27,13 +27,15 @@ namespace Project.Repository
 
         #region Properties
         protected VehicleContext DbContext { get; set; }
+
+        
         #endregion Properties
 
         #region Method
         public async Task<IEnumerable<T>> GetAll<T>() where T:class
         {
-            var response = await DbContext.Set<T>().ToListAsync();
-            return response;
+            var data = await DbContext.Set<T>().ToListAsync();
+            return data;
         }
 
         public async Task<T> GetIdAsync<T>(int id) where T : class
@@ -41,6 +43,14 @@ namespace Project.Repository
             var data = await DbContext.Set<T>().FindAsync(id);
             return data;
         }
+
+        public async Task<int> DeleteAsync<T>(int id) where T : class
+        {
+            var data= await DbContext.Set<T>().FindAsync(id);
+            DbContext.Entry(data).State=EntityState.Deleted;
+            return await DbContext.SaveChangesAsync();
+        }
+
 
         //public Task<int> AddAsync<T>(T entity) where T : class
         //{

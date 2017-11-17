@@ -40,6 +40,13 @@ namespace Project.Service
 
         }
 
+        public async Task<int> Delete(int id)
+        {
+            return await Repository.DeleteAsync<VehicleMake>(id);
+        }
+
+
+
 
 
         #endregion Metodhs
