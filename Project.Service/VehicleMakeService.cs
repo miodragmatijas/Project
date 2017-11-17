@@ -28,14 +28,12 @@ namespace Project.Service
         public async Task<IEnumerable<IVehicleMake>> GetAll()
         {
             var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(await Repository.GetAll<VehicleMake>());
-
             return dataVehicle;
         }
 
         public async Task<IVehicleMake> FindById(int id)
         {
             var dataVehicle = AutoMapper.Mapper.Map<IVehicleMake>(await Repository.GetIdAsync<VehicleMake>(id));
-
             return dataVehicle;
 
         }
@@ -44,10 +42,6 @@ namespace Project.Service
         {
             return await Repository.DeleteAsync<VehicleMake>(id);
         }
-
-
-
-
 
         #endregion Metodhs
 

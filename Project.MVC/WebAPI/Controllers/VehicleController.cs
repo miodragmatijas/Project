@@ -8,7 +8,7 @@ using WebAPI.Views;
 
 namespace WebAPI.Controllers
 {
-    [System.Web.Http.RoutePrefix("api/Vehicle")]
+    [RoutePrefix("api/Vehicle")]
     public class VehicleController : ApiController
     {
 
@@ -34,7 +34,6 @@ namespace WebAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, model);
         }
 
-
         // DELETE: api/Vehicle/5
         [HttpDelete]
         public async Task<HttpResponseMessage> Delete(int id)
@@ -45,6 +44,7 @@ namespace WebAPI.Controllers
 
 
         /*
+         
         // POST: api/Vehicle
         public void Post([FromBody]string value)
         {
@@ -53,9 +53,7 @@ namespace WebAPI.Controllers
         // PUT: api/Vehicle/5
         public void Put(int id, [FromBody]string value)
         {
-        }
-
-       
+        }     
 
        */
     }

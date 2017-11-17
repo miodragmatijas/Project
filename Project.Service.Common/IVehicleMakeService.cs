@@ -12,7 +12,6 @@ namespace Project.Service.Common
     {
         Task<IEnumerable<IVehicleMake>> GetAll();
         Task<IVehicleMake> FindById(int id);
-
         Task<int> Delete(int id);
     }
 }
