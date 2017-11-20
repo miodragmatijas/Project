@@ -70,6 +70,7 @@
     <Content Include="app\vehiclemake\vehicleMakeController.js" />
     <Content Include="app\vehiclemake\vehicleMakeService.js" />
     <Content Include="app\vehicleModule.js" />
+    <Content Include="app\View\VehicleMake\index.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />

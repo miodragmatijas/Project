@@ -1,0 +1,19 @@
+﻿<h2>VehicleMake List</h2>
+<div >
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>ABRV</th>
+        </tr>
+
+        <tbody ng-repeat="sub in vehicleMake">
+            <tr>
+                <td>{{sub.ID}}</td>
+                <td>{{sub.Name}}</td>
+                <td>{{sub.Abrv}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

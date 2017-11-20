@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="VehicleModule">
+<html ng-app="vehicleModule">
 
 <head>   
     <script src="Scripts/angular.js"></script>
@@ -11,26 +11,14 @@
 
 <body>
 
-    <h2>VehicleMake List</h2><h1></h1><br />
+    <a ng-href="#!/vehicleMake">Vehicle Make</a>
 
-    <div ng-controller="VehicleMakeController">
-        <table>
+    <h2>Project test Level 3</h2><h1></h1><br />    
 
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>ABRV</th>
-            </tr>
+    <div ng-view></div>
 
-            <tbody ng-repeat="sub in vehicleMake">
-                <tr>
-                    <td>{{sub.ID}}</td>
-                    <td>{{sub.Name}}</td>
-                    <td>{{sub.Abrv}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    
+
 </body>
 
 </html>
