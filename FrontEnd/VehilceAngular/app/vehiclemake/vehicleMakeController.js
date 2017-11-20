@@ -1,15 +1,4 @@
-﻿app.controller('VehicleMakeController', function ($scope, VehicleMakeService) {
-    getAll();
-
-    function getAll() {
-        var serviceCall = VehicleMakeService.getSubs();
-        serviceCall.then(function (d) {
-            $scope.vehicleMake = d.data;
-            
-            
-        }, function (error) {
-                $log.error('Fetch error');
-            }
-        );
-    }
+﻿app.controller('VehicleMakeController', function ($scope, $http) {
+    $http.get('http://localhost:64407/api/vehicle')
+        .then(function (response) { $scope.vehicleMake = response.data; });
 });
