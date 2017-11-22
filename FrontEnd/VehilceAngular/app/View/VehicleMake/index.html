@@ -1,5 +1,9 @@
-﻿<h2>VehicleMake List</h2>
-<div >
+﻿<br>
+<h2>VehicleMake List</h2>
+<div ng-controller="VehicleMakeController">
+
+    <a ng-href="#MakeAdd" class="button">Add new</a>
+
     <table>
 
         <tr>
@@ -10,11 +14,13 @@
 
         <tbody ng-repeat="sub in vehicleMake">
             <tr>
-                <td>{{sub.ID}}</td>
+                <td >{{sub.ID}}</td>
                 <td>{{sub.Name}}</td>
                 <td>{{sub.Abrv}}</td>
-                <td><a ng-href="#!/MakeDetails" ng-click="myClick(122)">Details</a></td>
+                <td></td>
+                <td><a ng-controller="MakeDetailsController" ng-click="detailsVehicle('{{sub.ID}}')" ng-href="#MakeDetails">Details</a></td>
             </tr>
+            
         </tbody>
     </table>
 </div>

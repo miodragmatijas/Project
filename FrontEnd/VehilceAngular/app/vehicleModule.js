@@ -1,18 +1,26 @@
 ﻿
 
-var app = angular.module('vehicleModule', ['ngRoute']);
+var vehicleModule = angular.module('vehicleModule', ['ngRoute']);
 
-app.config(function ($routeProvider) {
+vehicleModule.config(function ($routeProvider) {
+
     $routeProvider
-
-
         .when('/vehicleMake', {
-            templateUrl: 'app/View/VehicleMake/index.html',
-            controller: 'VehicleMakeController'
+            templateUrl: 'app/View/VehicleMake/index.html'
+            //controller: 'VehicleMakeController'
         })
         .when('/MakeDetails', {
-            templateUrl: 'app/View/VehicleMake/details.html',
-            controller: 'MakeDetails'
+            templateUrl: 'app/View/VehicleMake/details.html'
+            //controller: 'MakeDetails'
+        })
+        .when('/MakeAdd', {
+            templateUrl: 'app/View/VehicleMake/add.html',
+            controller: 'MakeAddController'
         });
+
+
+   
+
+
 
 });

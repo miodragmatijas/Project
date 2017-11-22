@@ -1,6 +1,6 @@
 /**
- * @license AngularJS v1.6.6
- * (c) 2010-2017 Google, Inc. http://angularjs.org
+ * @license AngularJS v1.5.8
+ * (c) 2010-2016 Google, Inc. http://angularjs.org
  * License: MIT
  */
 (function(window, angular) {'use strict';
@@ -13,14 +13,22 @@
 /* global isFunction: false */
 /* global noop: false */
 /* global toJson: false */
-/* global $$stringify: false */
+
+function stringify(value) {
+  if (value == null /* null/undefined */) { return ''; }
+  switch (typeof value) {
+    case 'string':     return value;
+    case 'number':     return '' + value;
+    default:           return toJson(value);
+  }
+}
 
 // Convert an index into the string into line/column for use in error messages
 // As such, this doesn't have to be efficient.
 function indexToLineAndColumn(text, index) {
   var lines = text.split(/\n/g);
-  for (var i = 0; i < lines.length; i++) {
-    var line = lines[i];
+  for (var i=0; i < lines.length; i++) {
+    var line=lines[i];
     if (index >= line.length) {
       index -= line.length;
     } else {
@@ -39,7 +47,7 @@ function parseTextLiteral(text) {
   parsedFn['$$watchDelegate'] = function watchDelegate(scope, listener, objectEquality) {
     var unwatch = scope['$watch'](noop,
         function textLiteralWatcher() {
-          if (isFunction(listener)) { listener(text, text, scope); }
+          if (isFunction(listener)) { listener.call(null, text, text, scope); }
           unwatch();
         },
         objectEquality);
@@ -56,14 +64,14 @@ function subtractOffset(expressionFn, offset) {
     return expressionFn;
   }
   function minusOffset(value) {
-    return (value == null) ? value : value - offset;
+    return (value == void 0) ? value : value - offset;
   }
   function parsedFn(context) { return minusOffset(expressionFn(context)); }
   var unwatch;
   parsedFn['$$watchDelegate'] = function watchDelegate(scope, listener, objectEquality) {
     unwatch = scope['$watch'](expressionFn,
         function pluralExpressionWatchListener(newValue, oldValue) {
-          if (isFunction(listener)) { listener(minusOffset(newValue), minusOffset(oldValue), scope); }
+          if (isFunction(listener)) { listener.call(null, minusOffset(newValue), minusOffset(oldValue), scope); }
         },
         objectEquality);
     return unwatch;
@@ -88,7 +96,7 @@ function MessageSelectorBase(expressionFn, choices) {
   var self = this;
   this.expressionFn = expressionFn;
   this.choices = choices;
-  if (choices['other'] === undefined) {
+  if (choices["other"] === void 0) {
     throw $interpolateMinErr('reqother', '“other” is a required option.');
   }
   this.parsedFn = function(context) { return self.getResult(context); };
@@ -122,7 +130,7 @@ function MessageSelectorWatchers(msgSelector, scope, listener, objectEquality) {
   this.msgSelector = msgSelector;
   this.listener = listener;
   this.objectEquality = objectEquality;
-  this.lastMessage = undefined;
+  this.lastMessage = void 0;
   this.messageFnWatcher = noop;
   var expressionFnListener = function(newValue, oldValue) { return self.expressionFnListener(newValue, oldValue); };
   this.expressionFnWatcher = scope['$watch'](msgSelector.expressionFn, expressionFnListener, objectEquality);
@@ -162,7 +170,7 @@ SelectMessageProto.prototype = MessageSelectorBase.prototype;
 
 SelectMessage.prototype = new SelectMessageProto();
 SelectMessage.prototype.categorizeValue = function categorizeSelectValue(value) {
-  return (this.choices[value] !== undefined) ? value : 'other';
+  return (this.choices[value] !== void 0) ? value : "other";
 };
 
 /**
@@ -182,12 +190,12 @@ PluralMessageProto.prototype = MessageSelectorBase.prototype;
 PluralMessage.prototype = new PluralMessageProto();
 PluralMessage.prototype.categorizeValue = function categorizePluralValue(value) {
   if (isNaN(value)) {
-    return 'other';
-  } else if (this.choices[value] !== undefined) {
+    return "other";
+  } else if (this.choices[value] !== void 0) {
     return value;
   } else {
     var category = this.pluralCat(value - this.offset);
-    return (this.choices[category] !== undefined) ? category : 'other';
+    return (this.choices[category] !== void 0) ? category : "other";
   }
 };
 
@@ -256,7 +264,7 @@ InterpolationParts.prototype.getExpressionValues = function getExpressionValues(
 InterpolationParts.prototype.getResult = function getResult(expressionValues) {
   for (var i = 0; i < this.expressionIndices.length; i++) {
     var expressionValue = expressionValues[i];
-    if (this.allOrNothing && expressionValue === undefined) return;
+    if (this.allOrNothing && expressionValue === void 0) return;
     this.textParts[this.expressionIndices[i]] = expressionValue;
   }
   return this.textParts.join('');
@@ -267,7 +275,7 @@ InterpolationParts.prototype.toParsedFn = function toParsedFn(mustHaveExpression
   var self = this;
   this.flushPartialText();
   if (mustHaveExpression && this.expressionFns.length === 0) {
-    return undefined;
+    return void 0;
   }
   if (this.textParts.length === 0) {
     return parseTextLiteral('');
@@ -276,7 +284,7 @@ InterpolationParts.prototype.toParsedFn = function toParsedFn(mustHaveExpression
     $interpolateMinErr['throwNoconcat'](originalText);
   }
   if (this.expressionFns.length === 0) {
-    if (this.textParts.length !== 1) { this.errorInParseLogic(); }
+    if (this.textParts.length != 1) { this.errorInParseLogic(); }
     return parseTextLiteral(this.textParts[0]);
   }
   var parsedFn = function(context) {
@@ -303,7 +311,7 @@ InterpolationParts.prototype.watchDelegate = function watchDelegate(scope, liste
 function InterpolationPartsWatcher(interpolationParts, scope, listener, objectEquality) {
   this.interpolationParts = interpolationParts;
   this.scope = scope;
-  this.previousResult = (undefined);
+  this.previousResult = (void 0);
   this.listener = listener;
   var self = this;
   this.expressionFnsWatcher = scope['$watchGroup'](interpolationParts.expressionFns, function(newExpressionValues, oldExpressionValues) {
@@ -415,7 +423,7 @@ MessageFormatParser.prototype.popState = function popState() {
 MessageFormatParser.prototype.matchRe = function matchRe(re, search) {
   re.lastIndex = this.index;
   var match = re.exec(this.text);
-  if (match != null && (search === true || (match.index === this.index))) {
+  if (match != null && (search === true || (match.index == this.index))) {
     this.index = re.lastIndex;
     return match;
   }
@@ -453,7 +461,7 @@ MessageFormatParser.prototype.errorInParseLogic = function errorInParseLogic() {
 };
 
 MessageFormatParser.prototype.assertRuleOrNull = function assertRuleOrNull(rule) {
-  if (rule === undefined) {
+  if (rule === void 0) {
     this.errorInParseLogic();
   }
 };
@@ -469,7 +477,7 @@ MessageFormatParser.prototype.errorExpecting = function errorExpecting() {
         position.line, position.column, this.text);
   }
   var word = match[1];
-  if (word === 'select' || word === 'plural') {
+  if (word == "select" || word == "plural") {
     position = indexToLineAndColumn(this.text, this.index);
     throw $interpolateMinErr('reqcomma',
         'Expected a comma after the keyword “{0}” at line {1}, column {2} of text “{3}”',
@@ -497,7 +505,7 @@ MessageFormatParser.prototype.ruleString = function ruleString() {
 MessageFormatParser.prototype.startStringAtMatch = function startStringAtMatch(match) {
   this.stringStartIndex = match.index;
   this.stringQuote = match[0];
-  this.stringInterestsRe = this.stringQuote === '\'' ? SQUOTED_STRING_INTEREST_RE : DQUOTED_STRING_INTEREST_RE;
+  this.stringInterestsRe = this.stringQuote == "'" ? SQUOTED_STRING_INTEREST_RE : DQUOTED_STRING_INTEREST_RE;
   this.rule = this.ruleInsideString;
 };
 
@@ -511,7 +519,8 @@ MessageFormatParser.prototype.ruleInsideString = function ruleInsideString() {
         'The string beginning at line {0}, column {1} is unterminated in text “{2}”',
         position.line, position.column, this.text);
   }
-  if (match[0] === this.stringQuote) {
+  var chars = match[0];
+  if (match == this.stringQuote) {
     this.rule = null;
   }
 };
@@ -524,8 +533,8 @@ MessageFormatParser.prototype.rulePluralOrSelect = function rulePluralOrSelect()
   }
   var argType = match[1];
   switch (argType) {
-    case 'plural': this.rule = this.rulePluralStyle; break;
-    case 'select': this.rule = this.ruleSelectStyle; break;
+    case "plural": this.rule = this.rulePluralStyle; break;
+    case "select": this.rule = this.ruleSelectStyle; break;
     default: this.errorInParseLogic();
   }
 };
@@ -543,7 +552,7 @@ MessageFormatParser.prototype.ruleSelectStyle = function ruleSelectStyle() {
 };
 
 var NUMBER_RE = /[0]|(?:[1-9][0-9]*)/g;
-var PLURAL_OFFSET_RE = new RegExp('\\s*offset\\s*:\\s*(' + NUMBER_RE.source + ')', 'g');
+var PLURAL_OFFSET_RE = new RegExp("\\s*offset\\s*:\\s*(" + NUMBER_RE.source + ")", "g");
 
 MessageFormatParser.prototype.rulePluralOffset = function rulePluralOffset() {
   var match = this.matchRe(PLURAL_OFFSET_RE);
@@ -553,7 +562,7 @@ MessageFormatParser.prototype.rulePluralOffset = function rulePluralOffset() {
 };
 
 MessageFormatParser.prototype.assertChoiceKeyIsNew = function assertChoiceKeyIsNew(choiceKey, index) {
-  if (this.choices[choiceKey] !== undefined) {
+  if (this.choices[choiceKey] !== void 0) {
     var position = indexToLineAndColumn(this.text, index);
     throw $interpolateMinErr('dupvalue',
         'The choice “{0}” is specified more than once. Duplicate key is at line {1}, column {2} in text “{3}”',
@@ -574,7 +583,7 @@ MessageFormatParser.prototype.ruleSelectKeyword = function ruleSelectKeyword() {
   this.rule = this.ruleMessageText;
 };
 
-var EXPLICIT_VALUE_OR_KEYWORD_RE = new RegExp('\\s*(?:(?:=(' + NUMBER_RE.source + '))|(\\w+))', 'g');
+var EXPLICIT_VALUE_OR_KEYWORD_RE = new RegExp("\\s*(?:(?:=(" + NUMBER_RE.source + "))|(\\w+))", "g");
 MessageFormatParser.prototype.rulePluralValueOrKeyword = function rulePluralValueOrKeyword() {
   var match = this.matchRe(EXPLICIT_VALUE_OR_KEYWORD_RE);
   if (match == null) {
@@ -591,7 +600,7 @@ MessageFormatParser.prototype.rulePluralValueOrKeyword = function rulePluralValu
   this.rule = this.ruleMessageText;
 };
 
-var BRACE_OPEN_RE = /\s*\{/g;
+var BRACE_OPEN_RE = /\s*{/g;
 var BRACE_CLOSE_RE = /}/g;
 MessageFormatParser.prototype.ruleMessageText = function ruleMessageText() {
   if (!this.consumeRe(BRACE_OPEN_RE)) {
@@ -611,7 +620,7 @@ var INTERP_OR_END_MESSAGE_RE = /\\.|{{|}/g;
 var INTERP_OR_PLURALVALUE_OR_END_MESSAGE_RE = /\\.|{{|#|}/g;
 var ESCAPE_OR_MUSTACHE_BEGIN_RE = /\\.|{{/g;
 MessageFormatParser.prototype.advanceInInterpolationOrMessageText = function advanceInInterpolationOrMessageText() {
-  var currentIndex = this.index, match;
+  var currentIndex = this.index, match, re;
   if (this.ruleChoiceKeyword == null) { // interpolation
     match = this.searchRe(ESCAPE_OR_MUSTACHE_BEGIN_RE);
     if (match == null) { // End of interpolation text.  Nothing more to process.
@@ -620,7 +629,7 @@ MessageFormatParser.prototype.advanceInInterpolationOrMessageText = function adv
       return null;
     }
   } else {
-    match = this.searchRe(this.ruleChoiceKeyword === this.rulePluralValueOrKeyword ?
+    match = this.searchRe(this.ruleChoiceKeyword == this.rulePluralValueOrKeyword ?
                           INTERP_OR_PLURALVALUE_OR_END_MESSAGE_RE : INTERP_OR_END_MESSAGE_RE);
     if (match == null) {
       var position = indexToLineAndColumn(this.text, this.msgStartIndex);
@@ -645,20 +654,20 @@ MessageFormatParser.prototype.ruleInInterpolationOrMessageText = function ruleIn
     this.rule = null;
     return;
   }
-  if (token[0] === '\\') {
+  if (token[0] == "\\") {
     // unescape next character and continue
     this.interpolationParts.addText(this.textPart + token[1]);
     return;
   }
   this.interpolationParts.addText(this.textPart);
-  if (token === '{{') {
+  if (token == "{{") {
     this.pushState();
     this.ruleStack.push(this.ruleEndMustacheInInterpolationOrMessage);
     this.rule = this.ruleEnteredMustache;
-  } else if (token === '}') {
+  } else if (token == "}") {
     this.choices[this.choiceKey] = this.interpolationParts.toParsedFn(/*mustHaveExpression=*/false, this.text);
     this.rule = this.ruleChoiceKeyword;
-  } else if (token === '#') {
+  } else if (token == "#") {
     this.interpolationParts.addExpressionFn(this.expressionMinusOffsetFn);
   } else {
     this.errorInParseLogic();
@@ -682,7 +691,7 @@ MessageFormatParser.prototype.ruleInInterpolation = function ruleInInterpolation
     return;
   }
   var token = match[0];
-  if (token[0] === '\\') {
+  if (token[0] == "\\") {
     // unescape next character and continue
     this.interpolationParts.addText(this.text.substring(currentIndex, match.index) + token[1]);
     return;
@@ -748,18 +757,18 @@ MessageFormatParser.prototype.ruleAngularExpression = function ruleAngularExpres
 
 function getEndOperator(opBegin) {
   switch (opBegin) {
-    case '{': return '}';
-    case '[': return ']';
-    case '(': return ')';
+    case "{": return "}";
+    case "[": return "]";
+    case "(": return ")";
     default: return null;
   }
 }
 
 function getBeginOperator(opEnd) {
   switch (opEnd) {
-    case '}': return '{';
-    case ']': return '[';
-    case ')': return '(';
+    case "}": return "{";
+    case "]": return "[";
+    case ")": return "(";
     default: return null;
   }
 }
@@ -769,6 +778,7 @@ function getBeginOperator(opEnd) {
 // should support any other type of start/end interpolation symbol.
 var INTERESTING_OPERATORS_RE = /[[\]{}()'",]/g;
 MessageFormatParser.prototype.ruleInAngularExpression = function ruleInAngularExpression() {
+  var startIndex = this.index;
   var match = this.searchRe(INTERESTING_OPERATORS_RE);
   var position;
   if (match == null) {
@@ -793,12 +803,12 @@ MessageFormatParser.prototype.ruleInAngularExpression = function ruleInAngularEx
         this.getEndOperator(innermostOperator), this.text);
   }
   var operator = match[0];
-  if (operator === '\'' || operator === '"') {
+  if (operator == "'" || operator == '"') {
     this.ruleStack.push(this.ruleInAngularExpression);
     this.startStringAtMatch(match);
     return;
   }
-  if (operator === ',') {
+  if (operator == ",") {
     if (this.trustedContext) {
       position = indexToLineAndColumn(this.text, this.index);
       throw $interpolateMinErr('unsafe',
@@ -826,7 +836,7 @@ MessageFormatParser.prototype.ruleInAngularExpression = function ruleInAngularEx
     this.errorInParseLogic();
   }
   if (this.angularOperatorStack.length > 0) {
-    if (beginOperator === this.angularOperatorStack[0]) {
+    if (beginOperator == this.angularOperatorStack[0]) {
       this.angularOperatorStack.shift();
       return;
     }
@@ -854,6 +864,7 @@ MessageFormatParser.prototype.ruleInAngularExpression = function ruleInAngularEx
 /* global noop: true */
 /* global toJson: true */
 /* global MessageFormatParser: false */
+/* global stringify: false */
 
 /**
  * @ngdoc module
@@ -898,9 +909,9 @@ MessageFormatParser.prototype.ruleInAngularExpression = function ruleInAngularEx
  *     this.gender = gender;
  *   }
  *
- *   var alice   = new Person('Alice', 'female'),
- *       bob     = new Person('Bob', 'male'),
- *       ashley = new Person('Ashley', '');
+ *   var alice   = new Person("Alice", "female"),
+ *       bob     = new Person("Bob", "male"),
+ *       ashley = new Person("Ashley", "");
  *
  *   angular.module('msgFmtExample', ['ngMessageFormat'])
  *     .controller('AppController', ['$scope', function($scope) {
@@ -941,11 +952,11 @@ MessageFormatParser.prototype.ruleInAngularExpression = function ruleInAngularEx
  *     this.gender = gender;
  *   }
  *
- *   var alice   = new Person('Alice', 'female'),
- *       bob     = new Person('Bob', 'male'),
- *       sarah     = new Person('Sarah', 'female'),
- *       harry   = new Person('Harry Potter', 'male'),
- *       ashley   = new Person('Ashley', '');
+ *   var alice   = new Person("Alice", "female"),
+ *       bob     = new Person("Bob", "male"),
+ *       sarah     = new Person("Sarah", "female"),
+ *       harry   = new Person("Harry Potter", "male"),
+ *       ashley   = new Person("Ashley", "");
  *
  *   angular.module('msgFmtExample', ['ngMessageFormat'])
  *     .controller('AppController', ['$scope', function($scope) {
@@ -1001,10 +1012,10 @@ MessageFormatParser.prototype.ruleInAngularExpression = function ruleInAngularEx
  *        this.gender = gender;
  *      }
  *
- *      var alice   = new Person('Alice', 'female'),
- *          bob     = new Person('Bob', 'male'),
- *          harry   = new Person('Harry Potter', 'male'),
- *          ashley   = new Person('Ashley', '');
+ *      var alice   = new Person("Alice", "female"),
+ *          bob     = new Person("Bob", "male"),
+ *          harry   = new Person("Harry Potter", "male"),
+ *          ashley   = new Person("Ashley", "");
  *
  *      angular.module('msgFmtExample', ['ngMessageFormat'])
  *        .controller('AppController', ['$scope', function($scope) {
@@ -1017,13 +1028,13 @@ MessageFormatParser.prototype.ruleInAngularExpression = function ruleInAngularEx
  */
 
 var $$MessageFormatFactory = ['$parse', '$locale', '$sce', '$exceptionHandler', function $$messageFormat(
-                               $parse,   $locale,   $sce,   $exceptionHandler) {
+                   $parse,   $locale,   $sce,   $exceptionHandler) {
 
   function getStringifier(trustedContext, allOrNothing, text) {
     return function stringifier(value) {
       try {
         value = trustedContext ? $sce['getTrusted'](trustedContext, value) : $sce['valueOf'](value);
-        return allOrNothing && (value === undefined) ? value : $$stringify(value);
+        return allOrNothing && (value === void 0) ? value : stringify(value);
       } catch (err) {
         $exceptionHandler($interpolateMinErr['interr'](text, err));
       }
@@ -1044,7 +1055,7 @@ var $$MessageFormatFactory = ['$parse', '$locale', '$sce', '$exceptionHandler', 
 }];
 
 var $$interpolateDecorator = ['$$messageFormat', '$delegate', function $$interpolateDecorator($$messageFormat, $interpolate) {
-  if ($interpolate['startSymbol']() !== '{{' || $interpolate['endSymbol']() !== '}}') {
+  if ($interpolate['startSymbol']() != "{{" || $interpolate['endSymbol']() != "}}") {
     throw $interpolateMinErr('nochgmustache', 'angular-message-format.js currently does not allow you to use custom start and end symbols for interpolation.');
   }
   var interpolate = $$messageFormat['interpolate'];
@@ -1057,17 +1068,14 @@ var $interpolateMinErr;
 var isFunction;
 var noop;
 var toJson;
-var $$stringify;
 
 var module = window['angular']['module']('ngMessageFormat', ['ng']);
-module['info']({ 'angularVersion': '1.6.6' });
 module['factory']('$$messageFormat', $$MessageFormatFactory);
 module['config'](['$provide', function($provide) {
   $interpolateMinErr = window['angular']['$interpolateMinErr'];
   isFunction = window['angular']['isFunction'];
   noop = window['angular']['noop'];
   toJson = window['angular']['toJson'];
-  $$stringify = window['angular']['$$stringify'];
 
   $provide['decorator']('$interpolate', $$interpolateDecorator);
 }]);

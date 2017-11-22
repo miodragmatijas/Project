@@ -1,7 +1,11 @@
-﻿app.controller('MakeDetails', function ($scope,$http) {
+﻿angular.module('vehicleModule').controller('MakeDetailsController', ['$scope', MakeDetailsController]);
 
-    $scope.id = 3434;
-    
+function MakeDetailsController($scope) {
 
-  
-}); 
+    $scope.detailsVehicle = function (k) {
+        var i = k;
+        $scope.message = i;
+    };
+}
+
+
