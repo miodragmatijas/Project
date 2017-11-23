@@ -12,13 +12,13 @@
             <th>ABRV</th>
         </tr>
 
-        <tbody ng-repeat="sub in vehicleMake">
+        <tbody ng-repeat="dat in vehicleMake">
             <tr>
-                <td >{{sub.ID}}</td>
-                <td>{{sub.Name}}</td>
-                <td>{{sub.Abrv}}</td>
+                <td >{{dat.ID}}</td>
+                <td>{{dat.Name}}</td>
+                <td>{{dat.Abrv}}</td>
                 <td></td>
-                <td><a ng-controller="MakeDetailsController" ng-click="detailsVehicle('{{sub.ID}}')" ng-href="#MakeDetails">Details</a></td>
+                <td><button ng-controller="MakeDetailsController" ng-click="detailsVehicle(dat.ID)">Details</button></td>
             </tr>
             
         </tbody>

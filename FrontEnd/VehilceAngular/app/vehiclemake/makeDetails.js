@@ -1,11 +1,14 @@
-﻿angular.module('vehicleModule').controller('MakeDetailsController', ['$scope', MakeDetailsController]);
+﻿vehicleModule.controller('MakeDetailsController', function ($scope,$location) {
 
-function MakeDetailsController($scope) {
+    $scope.id = toString;
 
-    $scope.detailsVehicle = function (k) {
-        var i = k;
-        $scope.message = i;
+    $scope.detailsVehicle = function (dat) {
+
+        toString = dat.toString();
+        $location.path('/MakeDetails');
     };
-}
+
+});
+   
 
 

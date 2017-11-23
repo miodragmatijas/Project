@@ -1,6 +1,4 @@
-﻿
-
-var vehicleModule = angular.module('vehicleModule', ['ngRoute']);
+﻿var vehicleModule = angular.module('vehicleModule', ['ngRoute']);
 
 vehicleModule.config(function ($routeProvider) {
 
@@ -10,8 +8,8 @@ vehicleModule.config(function ($routeProvider) {
             //controller: 'VehicleMakeController'
         })
         .when('/MakeDetails', {
-            templateUrl: 'app/View/VehicleMake/details.html'
-            //controller: 'MakeDetails'
+            templateUrl: 'app/View/VehicleMake/details.html',
+            controller: 'MakeDetailsController'
         })
         .when('/MakeAdd', {
             templateUrl: 'app/View/VehicleMake/add.html',
