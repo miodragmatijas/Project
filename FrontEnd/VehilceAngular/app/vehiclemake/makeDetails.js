@@ -1,18 +1,13 @@
-﻿vehicleModule.controller('MakeDetailsController', function ($scope,$location,$http) {
+﻿vehicleModule.controller('MakeDetailsController', function ($scope,$location,$http,$routeParams) {    
 
-    $scope.detailsVehicle =  async function (dat) {
+    $http.get('http://localhost:64407/api/vehicle/' + $routeParams.ID)
 
-       await $http.get('http://localhost:64407/api/vehicle/' + dat)
-
-            .then(function (response) { $scope.Vehicle = response.data; });
-
-       $scope.detailsVehicle.Vehicle.ID = $scope.Vehicle.ID;
-        var ai ="";
+        .then(function (response) {
+            $scope.ID = response.data.ID;
+            $scope.Name = response.data.Name;
+            $scope.Abrv = response.data.Abrv;
+        });    
         
-
-        
-    };
-    //$location.path('/MakeDetails');
 });
    
 

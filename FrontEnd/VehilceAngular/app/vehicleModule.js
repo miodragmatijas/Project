@@ -4,10 +4,10 @@ vehicleModule.config(function ($routeProvider) {
 
     $routeProvider
         .when('/vehicleMake', {
-            templateUrl: 'app/View/VehicleMake/index.html'
-            //controller: 'VehicleMakeController'
+            templateUrl: 'app/View/VehicleMake/index.html',
+            controller: 'VehicleMakeController'
         })
-        .when('/MakeDetails', {
+        .when('/MakeDetails/:ID', {
             templateUrl: 'app/View/VehicleMake/details.html',
             controller: 'MakeDetailsController'
         })
@@ -15,10 +15,5 @@ vehicleModule.config(function ($routeProvider) {
             templateUrl: 'app/View/VehicleMake/add.html',
             controller: 'MakeAddController'
         });
-
-
-   
-
-
 
 });
