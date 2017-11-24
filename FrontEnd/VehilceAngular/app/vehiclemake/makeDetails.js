@@ -16,7 +16,7 @@
                 msg = "Item " + xx + " is Deleted!!!";
                 $window.alert(msg);
                 $location.path("vehicleMake");
-            });        
+            });       
     };
 
 });

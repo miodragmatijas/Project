@@ -1,9 +1,7 @@
-﻿angular.module('vehicleModule').controller('MakeAddController', ['$scope', '$window', MakeAddController]);
+﻿vehicleModule.controller('MakeAddController', function ($scope, $window, $http) {
 
-function MakeAddController($scope, $window) {
 
     $scope.AddMake = function () {
-
         if ($scope.Name == null || $scope.Abrv == null) {
             $window.alert("GREŠKA");
         }
@@ -12,9 +10,13 @@ function MakeAddController($scope, $window) {
                 Name: $scope.Name,
                 Abrv: $scope.Abrv
             };
-
-            //dsfsf
         }
-    };
 
-}
+        $http.post('http://localhost:64407/api/vehicle/', obj).success(function (data) {
+            $scope.response = data;
+            console.log(data);
+            $window.alert("Success");
+        });
+    };
+});
+

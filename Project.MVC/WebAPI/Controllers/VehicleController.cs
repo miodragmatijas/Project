@@ -1,4 +1,5 @@
-﻿using Project.Service.Common;
+﻿using Project.Model.Common;
+using Project.Service.Common;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -41,14 +42,17 @@ namespace WebAPI.Controllers
             await _VehicleMakeService.Delete(id);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
-
+                
+        // POST: api/Vehicle
+        [HttpPost]
+        public async Task<HttpResponseMessage> Add(VehicleMakeView vehicleMakeView)
+        {
+            var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakeView);
+            var response = await _VehicleMakeService.Add(model);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
 
         /*
-         
-        // POST: api/Vehicle
-        public void Post([FromBody]string value)
-        {
-        }
 
         // PUT: api/Vehicle/5
         public void Put(int id, [FromBody]string value)

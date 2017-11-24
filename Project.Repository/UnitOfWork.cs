@@ -52,27 +52,12 @@ namespace Project.Repository
         }
 
 
-        //public Task<int> AddAsync<T>(T entity) where T : class
-        //{
-        //    try
-        //    {
-        //        DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
-        //        if (dbEntityEntry.State != EntityState.Detached)
-        //        {
-        //            dbEntityEntry.State = EntityState.Added;
-        //        }
-        //        else
-        //        {
-        //            DbContext.Set<T>().Add(entity);
-        //        }
-        //        return Task.FromResult(1);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //}
-
+        public async  Task<int> AddAsync<T>(T entity) where T : class
+        {
+            DbContext.Entry(entity).State = EntityState.Added;
+            return await DbContext.SaveChangesAsync();
+        }
+        
 
 
         //public async Task<int> CommitAsync()

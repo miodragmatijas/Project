@@ -1,17 +1,14 @@
-﻿<br>
-<h2>VehicleMake List</h2>
+﻿<h3>VehicleMake List</h3>
 <div ng-controller="VehicleMakeController">
 
-    <a ng-href="#!/MakeAdd" class="button">Add new</a>
+    <a ng-href="#MakeAdd" class="button">Add new</a>
 
     <table>
-
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>ABRV</th>
         </tr>
-
         <tbody ng-repeat="dat in vehicleMake">
             <tr>
                 <td >{{dat.ID}}</td>
