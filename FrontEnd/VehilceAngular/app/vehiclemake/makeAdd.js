@@ -1,9 +1,8 @@
-﻿vehicleModule.controller('MakeAddController', function ($scope, $window, $http) {
-
+﻿vehicleModule.controller('MakeAddController', function ($scope, $window, $http, $location) {
 
     $scope.AddMake = function () {
         if ($scope.Name == null || $scope.Abrv == null) {
-            $window.alert("GREŠKA");
+            $window.alert("Error!");
         }
         else {
             var obj = {
@@ -14,8 +13,9 @@
 
         $http.post('http://localhost:64407/api/vehicle/', obj).success(function (data) {
             $scope.response = data;
-            console.log(data);
-            $window.alert("Success");
+
+            $window.alert("Success Add new Item!");
+            $location.path("vehicleMake");
         });
     };
 });

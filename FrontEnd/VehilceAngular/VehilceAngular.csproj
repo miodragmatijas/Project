@@ -73,6 +73,7 @@
     <Content Include="app\vehicleModule.js" />
     <Content Include="app\View\VehicleMake\add.html" />
     <Content Include="app\View\VehicleMake\details.html" />
+    <Content Include="app\View\VehicleMake\edit.html" />
     <Content Include="app\View\VehicleMake\index.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\angular-animate.js" />

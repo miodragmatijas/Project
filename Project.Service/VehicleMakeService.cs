@@ -29,7 +29,6 @@ namespace Project.Service
         {
             var model = await Repository.GetAll<VehicleMake>();
             var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(model);
-            var i = 011;
             return dataVehicle;
         }
 
