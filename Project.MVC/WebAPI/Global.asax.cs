@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using Ninject;
 using Ninject.Web.Mvc;
 using Project.Model;
@@ -11,6 +12,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebAPI.Views;
 
 namespace WebAPI
 {
@@ -24,7 +26,13 @@ namespace WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Mapper.Initialize(config: cfg => { cfg.CreateMap<VehicleMake, IVehicleMake>(); cfg.CreateMap<VehicleModel, IVehicleModel>(); });
+            Mapper.Initialize(config: cfg => {
+
+                cfg.CreateMap<VehicleMake, IVehicleMake>();   
+                cfg.CreateMap<VehicleMakeView, IVehicleMake>();
+                cfg.CreateMap<VehicleModel, IVehicleModel>();
+
+            });
         }
         
     }

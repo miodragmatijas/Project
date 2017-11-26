@@ -52,29 +52,12 @@ namespace Project.Repository
         }
 
 
-        public async  Task<int> AddAsync<T>(T entity) where T : class
+        public async  Task<int> AddAsync<T>( T entity) where T : class
         {
             DbContext.Entry(entity).State = EntityState.Added;
             return await DbContext.SaveChangesAsync();
         }
         
-
-
-        //public async Task<int> CommitAsync()
-        //{
-        //    int result = 0;
-        //    using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-        //    {
-        //        result = await DbContext.SaveChangesAsync();
-        //        scope.Complete();
-        //    }
-        //    return result;
-        //}
-        //public void Dispose()
-        //{
-        //    //DbContext.Dispose();
-        //}
-
 
         #endregion Mehod
 

@@ -1,5 +1,7 @@
-﻿using Project.Model.Common;
+﻿using Project.Model;
+using Project.Model.Common;
 using Project.Service.Common;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -31,7 +33,8 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<HttpResponseMessage> GetId(int id)
         {
-            var model = AutoMapper.Mapper.Map<VehicleMakeView>(await _VehicleMakeService.FindById(id));
+            var vehicle= await _VehicleMakeService.FindById(id);
+            var model = AutoMapper.Mapper.Map<VehicleMakeView>(vehicle);
             return Request.CreateResponse(HttpStatusCode.OK, model);
         }
 
@@ -45,8 +48,10 @@ namespace WebAPI.Controllers
                 
         // POST: api/Vehicle
         [HttpPost]
-        public async Task<HttpResponseMessage> Add(VehicleMakeView vehicleMakeView)
+        //[Route("add")]
+        public async Task<HttpResponseMessage> Add([FromBody] VehicleMakeView vehicleMakeView)
         {
+            
             var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakeView);
             var response = await _VehicleMakeService.Add(model);
             return Request.CreateResponse(HttpStatusCode.OK);

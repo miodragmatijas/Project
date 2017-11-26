@@ -27,13 +27,16 @@ namespace Project.Service
 
         public async Task<IEnumerable<IVehicleMake>> GetAll()
         {
-            var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(await Repository.GetAll<VehicleMake>());
+            var model = await Repository.GetAll<VehicleMake>();
+            var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(model);
+            var i = 011;
             return dataVehicle;
         }
 
         public async Task<IVehicleMake> FindById(int id)
         {
-            var dataVehicle = AutoMapper.Mapper.Map<IVehicleMake>(await Repository.GetIdAsync<VehicleMake>(id));
+            var model = await Repository.GetIdAsync<VehicleMake>(id);
+            var dataVehicle = AutoMapper.Mapper.Map<IVehicleMake>(model);
             return dataVehicle;
 
         }
@@ -45,7 +48,9 @@ namespace Project.Service
 
         public async Task<int> Add(IVehicleMake data)
         {
-            return await Repository.AddAsync<IVehicleMake>(data);
+            var model = AutoMapper.Mapper.Map<VehicleMake>(data);
+            var x = await Repository.AddAsync(model);
+            return x;
         }
 
         #endregion Metodhs
