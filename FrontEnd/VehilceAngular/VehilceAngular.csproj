@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="app\dirPagination.js" />
     <Content Include="app\vehiclemake\makeAdd.js" />
     <Content Include="app\vehiclemake\makeDetails.js" />
     <Content Include="app\vehiclemake\vehicleMakeController.js" />
