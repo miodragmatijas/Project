@@ -16,7 +16,7 @@ vehicleModule.config(function ($routeProvider) {
             controller: 'MakeAddController'
         })
         .when('/MakeEdit/:ID', {
-            templateUrl: 'app/View/VehicleMake/edit.html'
-            //controller: 'MakeDetailsController'
+            templateUrl: 'app/View/VehicleMake/edit.html',
+            controller: 'MakeEditController'
         });
 });

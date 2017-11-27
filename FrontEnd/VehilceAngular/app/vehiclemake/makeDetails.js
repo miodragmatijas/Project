@@ -4,8 +4,7 @@
 
         .then(function (response) {
             $scope.ID = response.data.ID;
-            $scope.Name = response.data.Name;
-            $scope.Abrv = response.data.Abrv;
+           
         });
 
     $scope.makeDelete =  function (xx) {

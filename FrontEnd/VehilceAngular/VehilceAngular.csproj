@@ -70,6 +70,7 @@
     <Content Include="app\dirPagination.js" />
     <Content Include="app\vehiclemake\makeAdd.js" />
     <Content Include="app\vehiclemake\makeDetails.js" />
+    <Content Include="app\vehiclemake\makeEdit.js" />
     <Content Include="app\vehiclemake\vehicleMakeController.js" />
     <Content Include="app\vehicleModule.js" />
     <Content Include="app\View\VehicleMake\add.html" />
