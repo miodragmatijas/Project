@@ -11,16 +11,12 @@ using System.Linq;
 
 namespace Project.Repository
 {
-    public class UnitOfWork : IUnitOfWork
+    public class Repository : IRepository
     {
 
         #region Costructor
-        public UnitOfWork(VehicleContext dbContext)
-        {
-            if (dbContext == null)
-            {
-                throw new ArgumentException("DbContext");
-            }
+        public Repository(VehicleContext dbContext)
+        {           
             DbContext = dbContext;
         }
         #endregion Contructor
@@ -57,7 +53,13 @@ namespace Project.Repository
             DbContext.Entry(entity).State = EntityState.Added;
             return await DbContext.SaveChangesAsync();
         }
-        
+
+        public async Task<int> UpdateAsync<T>(T entity) where T : class
+        {
+            DbContext.Entry(entity).State = EntityState.Modified;
+            return await DbContext.SaveChangesAsync();            
+        }
+
 
         #endregion Mehod
 

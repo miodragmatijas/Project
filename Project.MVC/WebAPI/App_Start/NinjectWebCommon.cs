@@ -72,7 +72,7 @@ namespace WebAPI.App_Start
         {
             kernel.Bind<IVehicleMakeService>().To<Project.Service.VehicleMakeService>();
 
-            kernel.Bind<Project.Repository.Common.IUnitOfWork>().To<Project.Repository.UnitOfWork>();
+            kernel.Bind<Project.Repository.Common.IRepository>().To<Project.Repository.Repository>();
             //kernel.Bind<Project.Model.Common.IVehicleMake>().To<Project.Model.VehicleMake>();
             
             

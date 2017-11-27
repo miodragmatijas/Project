@@ -13,14 +13,14 @@ namespace Project.Service
     {
 
         #region Costructors
-        public VehicleMakeService(IUnitOfWork repository)
+        public VehicleMakeService(IRepository repository)
         {
             this.Repository = repository;
         }
         #endregion Constructors
 
         #region Properties
-        protected IUnitOfWork Repository { get; set; }
+        protected IRepository Repository { get; set; }
         #endregion Properties
 
         #region Metodhs
