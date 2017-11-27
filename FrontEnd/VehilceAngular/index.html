@@ -1,24 +1,24 @@
-﻿<!DOCTYPE html>
-<html ng-app="vehicleModule">
+﻿<html ng-app="app">
 
-<head>   
+<head>
     <script src="Scripts/angular.js"></script>
     <script src="Scripts/angular-route.js"></script>
 
-    <script src="app/vehicleModule.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/app.routes.js"></script>
 
-    <script src="app/vehiclemake/makeAdd.js"></script>
-    <script src="app/vehiclemake/vehicleMakeController.js"></script>
-    <script src="app/vehiclemake/makeDetails.js"></script>
-    <script src="app/vehiclemake/makeEdit.js"></script>
+    <script src="app/vehiclemake/makeAdd.controller.js"></script>
+    <script src="app/vehiclemake/makeIndex.controller.js"></script>
+    <script src="app/vehiclemake/makeDetails.controller.js"></script>
+    <script src="app/vehiclemake/makeEdit.controller.js"></script>
 </head>
 
 <body>
     <a href="#vehicleMake" class="button">Vehicle Make</a>
     <a href="#vehicleModel" class="button">Vehicle Model</a>
-     
-    <h2 style="text-align:center">PROJECT TEST LEVEL 3</h2>  
+
+    <h2 style="text-align:center">PROJECT TEST LEVEL 3</h2>
     <div ng-view></div>
 </body>
-</html>
 
+</html>

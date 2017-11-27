@@ -1,4 +1,8 @@
-﻿vehicleModule.controller('MakeAddController', function ($scope, $window, $http, $location) {
+﻿angular
+    .module('app')
+    .controller('MakeAddController', MakeAddController);
+
+function MakeAddController($scope, $window, $http, $location) {
 
     $scope.AddMake = function () {
         if ($scope.Name == null || $scope.Abrv == null) {
@@ -18,5 +22,4 @@
             $location.path("vehicleMake");
         });
     };
-});
-
+}

@@ -1,4 +1,8 @@
-﻿vehicleModule.controller('MakeEditController', function ($scope, $routeParams, $http, $window) {
+﻿angular
+    .module('app')
+    .controller('MakeEditController', MakeEditController);
+
+function MakeEditController($scope, $routeParams, $http, $window) {
 
     $http.get('http://localhost:64407/api/vehicle/' + $routeParams.ID)
 
@@ -6,7 +10,6 @@
             $scope.ID = response.data.ID;
             $scope.Name = response.data.Name;
             $scope.Abrv = response.data.Abrv;
-
 
             $scope.update = function () {
                 var obj = {
@@ -25,5 +28,4 @@
             };
 
         });
-
-});
+}

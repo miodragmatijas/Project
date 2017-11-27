@@ -1,6 +1,8 @@
-﻿var vehicleModule = angular.module('vehicleModule', ['ngRoute']);
+﻿angular
+    .module('app')
+    .config(config);
 
-vehicleModule.config(function ($routeProvider) {
+function config($routeProvider) {
 
     $routeProvider
         .when('/vehicleMake', {
@@ -19,4 +21,4 @@ vehicleModule.config(function ($routeProvider) {
             templateUrl: 'app/View/VehicleMake/edit.html',
             controller: 'MakeEditController'
         });
-});
+}

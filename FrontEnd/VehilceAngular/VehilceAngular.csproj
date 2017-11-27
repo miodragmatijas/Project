@@ -68,11 +68,12 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="app\dirPagination.js" />
-    <Content Include="app\vehiclemake\makeAdd.js" />
-    <Content Include="app\vehiclemake\makeDetails.js" />
-    <Content Include="app\vehiclemake\makeEdit.js" />
-    <Content Include="app\vehiclemake\vehicleMakeController.js" />
-    <Content Include="app\vehicleModule.js" />
+    <Content Include="app\app.routes.js" />
+    <Content Include="app\vehiclemake\makeAdd.controller.js" />
+    <Content Include="app\vehiclemake\makeDetails.controller.js" />
+    <Content Include="app\vehiclemake\makeEdit.controller.js" />
+    <Content Include="app\vehiclemake\makeIndex.controller.js" />
+    <Content Include="app\app.module.js" />
     <Content Include="app\View\VehicleMake\add.html" />
     <Content Include="app\View\VehicleMake\details.html" />
     <Content Include="app\View\VehicleMake\edit.html" />

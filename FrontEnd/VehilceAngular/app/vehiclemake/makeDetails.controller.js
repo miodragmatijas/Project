@@ -1,4 +1,8 @@
-﻿vehicleModule.controller('MakeDetailsController', function ($scope, $location, $http, $routeParams, $window) {
+﻿angular
+    .module('app')
+    .controller('MakeDetailsController', MakeDetailsController);
+
+function MakeDetailsController($scope, $location, $http, $routeParams, $window) {
 
     $http.get('http://localhost:64407/api/vehicle/' + $routeParams.ID)
 
@@ -6,10 +10,10 @@
             $scope.ID = response.data.ID;
             $scope.Name = response.data.Name;
             $scope.Abrv = response.data.Abrv;
-           
+
         });
 
-    $scope.makeDelete =  function (xx) {
+    $scope.makeDelete = function (xx) {
 
         $http.delete('http://localhost:64407/api/vehicle/' + $routeParams.ID)
 
@@ -17,10 +21,10 @@
                 msg = "Item " + xx + " is Deleted!!!";
                 $window.alert(msg);
                 $location.path("vehicleMake");
-            });       
+            });
     };
 
-});
+}
 
 
 
