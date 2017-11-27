@@ -1,14 +1,13 @@
 ﻿<h2>Edit Vehicle Make Item</h2>
-<div ng-controller="MakeEditController">
+<div >
     
     <br />
-    <label>ID: {{ID}} </label><br /><br />
+    <label ng-model="ID">ID: {{ID}} </label><br /><br />
     <label>Name: <input type="text" name="ime" ng-model="Name" value={{Name}} /></label><br /><br />
     <label>Abrv: <input type="text" ng-model="Abrv" value={{Abrv}}/></label><br />
+    <br />
+    <br />
 
-  
+    <button type="submit" ng-click="update()">Update</button>
        
-
-
-
 </div>
