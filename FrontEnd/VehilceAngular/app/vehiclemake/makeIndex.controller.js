@@ -1,10 +1,20 @@
 ﻿angular
     .module('app')
-    .controller('VehicleMakeController',VehicleMakeController);
+    .controller('VehicleMakeController', VehicleMakeController);
 
-function VehicleMakeController($scope,$http) {
+VehicleMakeController.$inject = ['dataservice'];
 
-    $http.get('http://localhost:64407/api/vehicle')
-        .then(function (response) { $scope.vehicleMake = response.data; });
+function VehicleMakeController(dataservice) {
+    var vm = this;
+    vm.vehicle = [];
 
+    getVehicle();
+
+    function getVehicle() {
+        return dataservice.getVehicle()
+            .then(function (data) {
+                vm.vehicle = data;               
+                return vm.vehicle;
+            });
+    }
 }

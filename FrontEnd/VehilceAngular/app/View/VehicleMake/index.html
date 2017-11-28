@@ -1,5 +1,5 @@
 ﻿<h3>VehicleMake List</h3>
-<div>
+<div ng-controller="VehicleMakeController as vm">
 
     <a ng-href="#MakeAdd" class="button">Add new</a>
     <br />
@@ -12,7 +12,7 @@
             <th>ABRV</th>
         </tr>
         <tbody>
-            <tr ng-repeat="dat in vehicleMake | filter : Txt">
+            <tr ng-repeat="dat in vm.vehicle | filter : Txt">
                 <td>{{dat.ID}}</td>
                 <td>{{dat.Name}}</td>
                 <td>{{dat.Abrv}}</td>
