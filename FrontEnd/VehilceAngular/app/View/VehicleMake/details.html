@@ -2,9 +2,11 @@
 <h4>Vehicle Make List Details</h4>
 <br />
 
-<div ng-controller="MakeDetailsController as vm" >
+<div ng-controller="MakeDeleteController"><button ng-click="makeDelete()"> Delete </button>  </div>
 
-    <input type="button" ng-click="makeDelete(ID)" value="Delete item"/>
+<div ng-controller="MakeDetailsController as vm">
+
+
     <p style="color:red"><strong>DANGER!!! This Item will be Deleted.</strong></p>
     <br />
     <br />

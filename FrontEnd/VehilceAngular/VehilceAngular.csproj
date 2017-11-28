@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\vehiclemake\makeDelete.controller.js" />
     <None Include="packages.config" />
     <Content Include="app\dirPagination.js" />
     <Content Include="app\app.routes.js" />

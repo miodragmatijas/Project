@@ -8,10 +8,10 @@ function dataservice($http, logger) {
 
     var service = {
         getVehicle: getVehicle,
-        getVehicleId: getVehicleId
+        getVehicleId: getVehicleId,
+        deleteVehicleId: deleteVehicleId
     };
     return service;
-
 
     function getVehicle() {
         return $http.get('http://localhost:64407/api/vehicle')
@@ -26,8 +26,19 @@ function dataservice($http, logger) {
     }
 
     function getVehicleId(id) {
-        var i = 1;
         return $http.get('http://localhost:64407/api/vehicle/' + id)
+            .then(getVehicleComplete)
+            .catch(getVehicleError);
+        function getVehicleComplete(response) {
+            return response.data;
+        }
+        function getVehicleError(error) {
+            logger.error('Error' + error.data);
+        }
+    }
+
+    function deleteVehicleId(id) {
+        return $http.delete('http://localhost:64407/api/vehicle/' + id)
             .then(getVehicleComplete)
             .catch(getVehicleError);
         function getVehicleComplete(response) {
