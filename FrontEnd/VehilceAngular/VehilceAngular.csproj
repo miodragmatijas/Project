@@ -69,6 +69,7 @@
     <None Include="packages.config" />
     <Content Include="app\dirPagination.js" />
     <Content Include="app\app.routes.js" />
+    <Content Include="app\logger.js" />
     <Content Include="app\Service\VehicleMake\vehicleMake.service.js" />
     <Content Include="app\vehiclemake\makeAdd.controller.js" />
     <Content Include="app\vehiclemake\makeDetails.controller.js" />

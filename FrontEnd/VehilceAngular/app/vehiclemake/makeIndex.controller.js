@@ -8,7 +8,7 @@ function VehicleMakeController(dataservice) {
     var vm = this;
     vm.vehicle = [];
 
-    getVehicle();
+    getVehicle();    
 
     function getVehicle() {
         return dataservice.getVehicle()

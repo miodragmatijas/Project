@@ -1,7 +1,8 @@
-﻿<h4>Vehicle Make List Details</h4>
+﻿
+<h4>Vehicle Make List Details</h4>
 <br />
 
-<div>
+<div ng-controller="MakeDetailsController as vm" >
 
     <input type="button" ng-click="makeDelete(ID)" value="Delete item"/>
     <p style="color:red"><strong>DANGER!!! This Item will be Deleted.</strong></p>
@@ -9,9 +10,9 @@
     <br />
     <table>
         <tr><th>List details</th></tr>
-        <tr><td>ID : {{ID}}</td></tr>
-        <tr><td>Name : {{Name}}</td></tr>
-        <tr><td>Abrv :{{Abrv}}</td></tr>
+        <tr><td>ID : {{vm.ID}}</td></tr>
+        <tr><td>Name : {{vm.Name}}</td></tr>
+        <tr><td>Abrv : {{vm.Abrv}}</td></tr>
     </table>
-    
+
 </div>
