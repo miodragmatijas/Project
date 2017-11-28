@@ -2,24 +2,25 @@
     .module('app')
     .controller('MakeAddController', MakeAddController);
 
-function MakeAddController($scope, $window, $http, $location) {
+MakeAddController.$inject = ['$scope', 'dataservice', '$window', '$location'];
 
-    $scope.AddMake = function () {
-        if ($scope.Name == null || $scope.Abrv == null) {
-            $window.alert("Error!");
+function MakeAddController($scope, dataservice, $window, $location) {
+
+    $scope.addMake = function () {
+
+        var obj = {
+            Name: $scope.Name,
+            Abrv: $scope.Abrv
+        };
+
+        addVehicle();
+
+        function addVehicle() {
+            return dataservice.addVehicle(obj)
+                .then(function () {
+                    $window.alert("Success Add new Item!");
+                    $location.path("/vehicleMake");
+                });
         }
-        else {
-            var obj = {
-                Name: $scope.Name,
-                Abrv: $scope.Abrv
-            };
-        }
-
-        $http.post('http://localhost:64407/api/vehicle/', obj).success(function (data) {
-            $scope.response = data;
-
-            $window.alert("Success Add new Item!");
-            $location.path("vehicleMake");
-        });
     };
 }

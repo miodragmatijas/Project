@@ -1,16 +1,12 @@
 ﻿
+
+<input type="text" id="name" ng-model="Name" placeholder="Name" />
+<p></p>
+<p></p>
+<input type="text" id="abrv" ng-model="Abrv" placeholder="Abrv" />
+<p></p>
+<p></p>
 <div ng-controller="MakeAddController">
-
-    <div>
-        <input type="text" id="name" ng-model="Name" placeholder="Name" />
-    </div>
-
-
-    <div>
-        <input type="text" id="abrv" ng-model="Abrv" placeholder="Abrv" />
-    </div>
-
-    <p></p>
-    <button type="button" class="btn btn-default" ng-click="AddMake()">Add new</button>
-
+    <button ng-click="addMake()"> Add new </button>
 </div>
+

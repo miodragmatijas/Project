@@ -12,7 +12,7 @@ function MakeDeleteController(dataservice, $scope, $routeParams, $window, $locat
 
         function deleteVehicle() {
             return dataservice.deleteVehicleId($routeParams.ID)
-                .then(function (data) {
+                .then(function () {
                     msg = "Item " + $routeParams.ID + " is Deleted!!!";
                     $window.alert(msg);
                     $location.path("/vehicleMake");

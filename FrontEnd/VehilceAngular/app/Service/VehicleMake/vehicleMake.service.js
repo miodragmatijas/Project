@@ -9,7 +9,8 @@ function dataservice($http, logger) {
     var service = {
         getVehicle: getVehicle,
         getVehicleId: getVehicleId,
-        deleteVehicleId: deleteVehicleId
+        deleteVehicleId: deleteVehicleId,
+        addVehicle: addVehicle
     };
     return service;
 
@@ -48,6 +49,20 @@ function dataservice($http, logger) {
             logger.error('Error' + error.data);
         }
     }
+
+    function addVehicle(obj) {
+        return $http.post('http://localhost:64407/api/vehicle/', obj)
+            .then(getVehicleComplete)
+            .catch(getVehicleError);
+        function getVehicleComplete(response) {
+            return response.data;
+        }
+        function getVehicleError(error) {
+            logger.error('Error' + error.data);
+        }
+    }
+
+
 }
 
 
