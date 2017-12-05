@@ -61,6 +61,7 @@ namespace WebAPI.Controllers
         [HttpPut]
         public async Task<HttpResponseMessage> Update(int id, [FromBody]VehicleMakeView vehicleMakeView)
         {
+            vehicleMakeView.ID = id;
             var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakeView);
             var response =await _VehicleMakeService.Update(model);
             return Request.CreateResponse(HttpStatusCode.OK);
