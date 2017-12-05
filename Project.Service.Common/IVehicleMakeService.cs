@@ -14,5 +14,6 @@ namespace Project.Service.Common
         Task<IVehicleMake> FindById(int id);
         Task<int> Delete(int id);
         Task<int> Add(IVehicleMake data);
+        Task<int> Update(IVehicleMake data);
     }
 }

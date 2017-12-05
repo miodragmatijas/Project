@@ -57,13 +57,13 @@ namespace WebAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        /*
-
         // PUT: api/Vehicle/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public async Task<HttpResponseMessage> Update(int id, [FromBody]VehicleMakeView vehicleMakeView)
         {
+            var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakeView);
+            var response =await _VehicleMakeService.Update(model);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }     
-
-       */
     }
 }

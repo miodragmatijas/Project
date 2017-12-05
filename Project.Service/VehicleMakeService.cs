@@ -52,6 +52,12 @@ namespace Project.Service
             return x;
         }
 
+        public async Task<int> Update(IVehicleMake data)
+        {
+            var model = AutoMapper.Mapper.Map<VehicleMake>(data);
+            var x = await Repository.UpdateAsync(model);
+            return x;
+        }
         #endregion Metodhs
 
     }
