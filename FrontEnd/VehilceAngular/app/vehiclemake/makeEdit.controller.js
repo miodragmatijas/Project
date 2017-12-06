@@ -2,30 +2,60 @@
     .module('app')
     .controller('MakeEditController', MakeEditController);
 
-function MakeEditController($scope, $routeParams, $http, $window) {
+MakeEditController.$inject = ['dataservice', '$scope', '$routeParams', '$window', '$location'];
 
-    $http.get('http://localhost:64407/api/vehicle/' + $routeParams.ID)
 
-        .then(function (response) {
-            $scope.ID = response.data.ID;
-            $scope.Name = response.data.Name;
-            $scope.Abrv = response.data.Abrv;
+function MakeEditController(dataservice, $scope, $routeParams, $window, $location) {
 
-            $scope.update = function () {
-                var obj = {
-                    ID: response.data.ID,
-                    Name: response.data.Name,
-                    Abrv: response.data.Abrv
-                };
+    var vm = this;
+    vm.ID = '';
+    vm.Name = '';
+    vm.Abrv = '';
 
-                $http.put('http://localhost:64407/api/vehicle/', obj).success(function (data) {
+    $scope.Name = '';
+    $scope.Abrv = '';
+    
 
-                    $windwow.alert("Success Updated!!!");
+    getVehicleId();
 
-                }).error(function (data) {
-                    $window.alert("Error! " + data.Message);
-                });
+    function getVehicleId() {
+
+        return dataservice.getVehicleId($routeParams.ID)
+            .then(function (data) {
+                vm.ID = data.ID;
+                //vm.Name = data.Name;
+                //vm.Abrv = data.Abrv;
+                $scope.Name = data.Name;
+                $scope.Abrv = data.Abrv;
+                return vm;
+            });
+    }
+
+    
+
+    $scope.update = function () {
+
+      
+
+
+        updateVehicle();
+
+        function updateVehicle() {
+
+           
+            var obj = {
+                Name: $scope.Name,
+                Abrv: $scope.Abrv
             };
 
-        });
+            return dataservice.updateVehicleId($routeParams.ID, obj)
+            .then(function () {
+                msg = "Item " + $routeParams.ID + " is Updated!!!";
+                $window.alert(msg);
+                $location.path("/vehicleMake");
+                var q = 1;
+            });
+        }
+    };
+
 }
