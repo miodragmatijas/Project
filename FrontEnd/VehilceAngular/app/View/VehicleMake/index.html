@@ -3,20 +3,29 @@
 
     <a ng-href="#MakeAdd" class="button">Add new</a>
     <br />
-    <label>Search item: <input type="text" ng-model="Txt" /></label>
+    <br />
 
-    <table>
+    <label>Search item: <input type="text" ng-model="Txt" /></label>
+    <br />
+    <br />
+
+    <table style="width:40%">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>ABRV</th>
+            <th>
+            <button ng-click="sort('ID')">ID</button>
+            </th>
+            <th>
+            <button ng-click="sort('Name')">Name</button>
+            </th>
+            <th>
+            <button ng-click="sort('Abrv')">Abrv</button>
+            </th>
         </tr>
         <tbody>
-            <tr ng-repeat="dat in vm.vehicle | filter : Txt">
+            <tr style="background-color:gainsboro; color:blue;" ng-repeat="dat in vm.vehicle | orderBy : sortKey : reverse | filter : Txt">
                 <td>{{dat.ID}}</td>
                 <td>{{dat.Name}}</td>
                 <td>{{dat.Abrv}}</td>
-                <td></td>
                 <td><a ng-href="#/MakeDetails/{{dat.ID}}">Details</a></td>
                 <td><a ng-href="#/MakeEdit/{{dat.ID}}">Edit</a></td>
             </tr>

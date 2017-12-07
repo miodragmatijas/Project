@@ -3,7 +3,6 @@
 <head>
     <script src="Scripts/angular.js"></script>
     <script src="Scripts/angular-route.js"></script>
-    
 
     <script src="app/app.module.js"></script>
     <script src="app/app.routes.js"></script>
@@ -15,14 +14,19 @@
     <script src="app/vehiclemake/makeDetails.controller.js"></script>
     <script src="app/vehiclemake/makeEdit.controller.js"></script>
     <script src="app/vehiclemake/makeDelete.controller.js"></script>
+
 </head>
 
 <body>
-    <a href="#vehicleMake" class="button">Vehicle Make</a>
-    <a href="#vehicleModel" class="button">Vehicle Model</a>
+    <div>
+        <a href="#vehicleMake" class="button">Vehicle Make</a>
+        <a href="#vehicleModel" class="button">Vehicle Model</a>
+    </div>
 
-    <h2 style="text-align:center">PROJECT TEST LEVEL 3</h2>
+    <h2 style="text-align:center; color:red">PROJECT TEST LEVEL 3</h2>
+
     <div ng-view></div>
+
 </body>
 
 </html>
