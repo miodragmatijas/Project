@@ -7,6 +7,7 @@ VehicleMakeController.$inject = ['dataservice', '$scope'];
 function VehicleMakeController(dataservice, $scope) {
     var vm = this;
     vm.vehicle = [];
+    $scope.itemsPerPage = 5;
 
     getVehicle();
 

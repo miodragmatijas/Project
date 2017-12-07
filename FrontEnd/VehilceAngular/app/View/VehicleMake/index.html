@@ -1,5 +1,5 @@
 ﻿<h3>VehicleMake List</h3>
-<div ng-controller="VehicleMakeController as vm">
+<div ng-controller="VehicleMakeController as vm" style="padding:20px">
 
     <a ng-href="#MakeAdd" class="button">Add new</a>
     <br />
@@ -9,7 +9,7 @@
     <br />
     <br />
 
-    <table style="width:40%">
+    <table style="width:100%">
         <tr>
             <th>
             <button ng-click="sort('ID')">ID</button>
@@ -22,7 +22,7 @@
             </th>
         </tr>
         <tbody>
-            <tr style="background-color:gainsboro; color:blue;" ng-repeat="dat in vm.vehicle | orderBy : sortKey : reverse | filter : Txt">
+            <tr  dir-paginate="dat in vm.vehicle | orderBy : sortKey : reverse | filter : Txt | itemsPerPage: itemsPerPage" pagination-id="vehicle">
                 <td>{{dat.ID}}</td>
                 <td>{{dat.Name}}</td>
                 <td>{{dat.Abrv}}</td>
@@ -32,5 +32,9 @@
         </tbody>
     </table>
 
-
+    <dir-pagination-controls                            
+                             pagination-id="vehicle">
+    </dir-pagination-controls>
+    
+    
 </div>

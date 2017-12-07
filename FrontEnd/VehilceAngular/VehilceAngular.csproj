@@ -69,7 +69,6 @@
     <Content Include="app\logger.js" />
     <Content Include="app\vehiclemake\makeDelete.controller.js" />
     <None Include="packages.config" />
-    <Content Include="app\dirPagination.js" />
     <Content Include="app\app.routes.js" />
     <Content Include="app\Service\VehicleMake\vehicleMake.service.js" />
     <Content Include="app\vehiclemake\makeAdd.controller.js" />
@@ -109,6 +108,8 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\dirPagination.js" />
+    <Content Include="Scripts\dirPagination.tpl.html" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
