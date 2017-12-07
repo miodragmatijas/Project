@@ -9,32 +9,31 @@
     <br />
     <br />
 
-    <table style="width:100%">
+    <table>
         <tr>
             <th>
-            <button ng-click="sort('ID')">ID</button>
+                <button ng-click="sort('ID')">ID</button>
             </th>
             <th>
-            <button ng-click="sort('Name')">Name</button>
+                <button ng-click="sort('Name')">Name</button>
             </th>
             <th>
-            <button ng-click="sort('Abrv')">Abrv</button>
+                <button ng-click="sort('Abrv')">Abrv</button>
             </th>
         </tr>
         <tbody>
-            <tr  dir-paginate="dat in vm.vehicle | orderBy : sortKey : reverse | filter : Txt | itemsPerPage: itemsPerPage" pagination-id="vehicle">
+            <tr dir-paginate="dat in vm.vehicle | orderBy : sortKey : reverse | filter : Txt | itemsPerPage: itemsPerPage" pagination-id="vehicle">
                 <td>{{dat.ID}}</td>
-                <td>{{dat.Name}}</td>
-                <td>{{dat.Abrv}}</td>
-                <td><a ng-href="#/MakeDetails/{{dat.ID}}">Details</a></td>
-                <td><a ng-href="#/MakeEdit/{{dat.ID}}">Edit</a></td>
+                <td style="width:auto; padding-left:10px; padding-right:10px;">{{dat.Name}}</td>
+                <td style="width:auto; padding-left:10px; padding-right:10px;">{{dat.Abrv}}</td>
+                <td style="width:100px"><a ng-href="#/MakeDetails/{{dat.ID}}">Details</a></td>
+                <td style="width:100px"><a ng-href="#/MakeEdit/{{dat.ID}}">Edit</a></td>
             </tr>
         </tbody>
     </table>
 
-    <dir-pagination-controls                            
-                             pagination-id="vehicle">
+    <dir-pagination-controls pagination-id="vehicle">
     </dir-pagination-controls>
-    
-    
+
+
 </div>
