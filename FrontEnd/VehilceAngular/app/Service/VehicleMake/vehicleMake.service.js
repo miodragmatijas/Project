@@ -17,7 +17,8 @@ function dataservice($http, logger) {
     return service;
 
     function getVehicle() {
-        return $http.get('http://localhost:64407/api/vehicle')
+        
+        return $http.get('http://localhost:64407/api/vehicle?' + 'pageIndex=' + 1 + '&pageSize=' + 11 + '&txtSearch=' + 'r')
             .then(getVehicleComplete)
             .catch(getVehicleError);
         function getVehicleComplete(response) {

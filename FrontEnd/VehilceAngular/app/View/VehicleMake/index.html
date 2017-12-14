@@ -22,7 +22,7 @@
             </th>
         </tr>
         <tbody>
-            <tr dir-paginate="dat in vm.vehicle | orderBy : sortKey : reverse | filter : Txt | itemsPerPage: itemsPerPage" pagination-id="vehicle">
+            <tr ng-repeat="dat in vm.vehicle | orderBy : sortKey : reverse | filter : Txt ">
                 <td>{{dat.ID}}</td>
                 <td style="width:auto; padding-left:10px; padding-right:10px;">{{dat.Name}}</td>
                 <td style="width:auto; padding-left:10px; padding-right:10px;">{{dat.Abrv}}</td>
@@ -31,9 +31,5 @@
             </tr>
         </tbody>
     </table>
-
-    <dir-pagination-controls pagination-id="vehicle">
-    </dir-pagination-controls>
-
 
 </div>

@@ -23,16 +23,14 @@ namespace WebAPI.Controllers
 
         // GET: api/Vehicle
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAsync()
-        {
-            int pageIndex = 2;
-            int pageSize = 5;
-            string txtSearch = "";
+        public async Task<HttpResponseMessage> GetAsync(int pageIndex, int pageSize , string txtSearch)
+        {            
+            //string txtSearch = "";
             string txtSort = "name";
 
             var vehicle = await _VehicleMakeService.GetAll(pageIndex, pageSize, txtSearch, txtSort);
 
-               var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(vehicle.Item1);
+            var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(vehicle.Item1);
 
             return Request.CreateResponse(HttpStatusCode.OK, model);
         }
@@ -41,7 +39,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<HttpResponseMessage> GetId(int id)
         {
-            var vehicle= await _VehicleMakeService.FindById(id);
+            var vehicle = await _VehicleMakeService.FindById(id);
             var model = AutoMapper.Mapper.Map<VehicleMakeView>(vehicle);
             return Request.CreateResponse(HttpStatusCode.OK, model);
         }
@@ -53,13 +51,13 @@ namespace WebAPI.Controllers
             await _VehicleMakeService.Delete(id);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
-                
+
         // POST: api/Vehicle
         [HttpPost]
         //[Route("add")]
         public async Task<HttpResponseMessage> Add([FromBody] VehicleMakeView vehicleMakeView)
         {
-            
+
             var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakeView);
             var response = await _VehicleMakeService.Add(model);
             return Request.CreateResponse(HttpStatusCode.OK);
@@ -71,8 +69,8 @@ namespace WebAPI.Controllers
         {
             vehicleMakeView.ID = id;
             var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakeView);
-            var response =await _VehicleMakeService.Update(model);
+            var response = await _VehicleMakeService.Update(model);
             return Request.CreateResponse(HttpStatusCode.OK);
-        }     
+        }
     }
 }
