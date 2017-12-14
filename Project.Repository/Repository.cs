@@ -30,6 +30,7 @@ namespace Project.Repository
         #region Method
         public async Task<IEnumerable<T>> GetAll<T>() where T:class
         {
+
             var data = await DbContext.Set<T>().ToListAsync();
             return data;
         }

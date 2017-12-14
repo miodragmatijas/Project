@@ -5,6 +5,8 @@ using Project.Repository.Common;
 using Project.Model.Common;
 using Project.Model;
 using System;
+using System.Linq;
+using PagedList;
 
 namespace Project.Service
 {
@@ -28,7 +30,31 @@ namespace Project.Service
         public async Task<IEnumerable<IVehicleMake>> GetAll()
         {
             var model = await Repository.GetAll<VehicleMake>();
-            var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(model);
+
+            int pageIndex = 1;
+            int pageSize = 5;
+            string txtSearch = "";
+            int i = model.Count();
+            string txtSort = "name_desc";
+
+            var data = from d in model
+                       where d.Name.Contains(txtSearch) || d.Abrv.Contains(txtSearch)
+                       select d;
+
+            switch (txtSort)
+            {
+                case "name_desc":
+                    data = data.OrderByDescending(s => s.Name).ToList();
+                    break;
+                default:
+                    data = data.OrderBy(s => s.Name).ToList();
+                    break;
+            }
+
+
+            data = data.ToPagedList(pageIndex, pageSize);
+
+            var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(data);
             return dataVehicle;
         }
 
