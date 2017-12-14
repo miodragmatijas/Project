@@ -27,15 +27,11 @@ namespace Project.Service
 
         #region Metodhs
 
-        public async Task<IEnumerable<IVehicleMake>> GetAll()
+        public async Task<Tuple<IEnumerable<IVehicleMake>, int>> GetAll(int pageIndex, int pageSize, string txtSearch, string txtSort)
         {
             var model = await Repository.GetAll<VehicleMake>();
 
-            int pageIndex = 1;
-            int pageSize = 5;
-            string txtSearch = "";
-            int i = model.Count();
-            string txtSort = "name_desc";
+            int dataCount = model.Count();
 
             var data = from d in model
                        where d.Name.Contains(txtSearch) || d.Abrv.Contains(txtSearch)
@@ -51,11 +47,12 @@ namespace Project.Service
                     break;
             }
 
-
             data = data.ToPagedList(pageIndex, pageSize);
 
             var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(data);
-            return dataVehicle;
+
+
+            return new Tuple<IEnumerable<IVehicleMake>, int>(dataVehicle, dataCount);
         }
 
         public async Task<IVehicleMake> FindById(int id)

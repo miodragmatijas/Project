@@ -25,7 +25,15 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<HttpResponseMessage> GetAsync()
         {
-            var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(await _VehicleMakeService.GetAll());
+            int pageIndex = 2;
+            int pageSize = 5;
+            string txtSearch = "";
+            string txtSort = "name";
+
+            var vehicle = await _VehicleMakeService.GetAll(pageIndex, pageSize, txtSearch, txtSort);
+
+               var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(vehicle.Item1);
+
             return Request.CreateResponse(HttpStatusCode.OK, model);
         }
 
