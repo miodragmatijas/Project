@@ -22,7 +22,7 @@
             </th>
         </tr>
         <tbody>
-            <tr ng-repeat="dat in vm.vehicle | orderBy : sortKey : reverse | filter : Txt ">
+            <tr ng-repeat="dat in vm.vehicle">
                 <td>{{dat.ID}}</td>
                 <td style="width:auto; padding-left:10px; padding-right:10px;">{{dat.Name}}</td>
                 <td style="width:auto; padding-left:10px; padding-right:10px;">{{dat.Abrv}}</td>

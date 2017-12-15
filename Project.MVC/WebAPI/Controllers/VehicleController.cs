@@ -23,16 +23,22 @@ namespace WebAPI.Controllers
 
         // GET: api/Vehicle
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAsync(int pageIndex, int pageSize , string txtSearch)
-        {            
-            //string txtSearch = "";
-            string txtSort = "name";
+        public async Task<HttpResponseMessage> GetAsync(int pageIndex, int pageSize , string txtSearch, string txtSort)
+        {
+            if (txtSearch == null) { txtSearch = ""; };
+            //string txtSort = "name";
 
             var vehicle = await _VehicleMakeService.GetAll(pageIndex, pageSize, txtSearch, txtSort);
 
             var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(vehicle.Item1);
 
-            return Request.CreateResponse(HttpStatusCode.OK, model);
+            VehiclePaged vehiclePaged = new VehiclePaged
+            {
+                CountData = vehicle.Item2,
+                VehicleMakeView = model
+            };
+
+            return Request.CreateResponse(HttpStatusCode.OK, vehiclePaged);
         }
 
         // GET: api/Vehicle/5

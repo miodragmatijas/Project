@@ -17,14 +17,21 @@ function dataservice($http, logger) {
     return service;
 
     function getVehicle() {
-        
-        return $http.get('http://localhost:64407/api/vehicle?' + 'pageIndex=' + 1 + '&pageSize=' + 11 + '&txtSearch=' + 'r')
+    
+        return $http.get('http://localhost:64407/api/vehicle?'
+            + 'pageIndex=' + 1
+            + '&pageSize=' + 11
+            + '&txtSearch=' + ''
+            + '&txtSort=' + 'name_desc')
             .then(getVehicleComplete)
             .catch(getVehicleError);
+
         function getVehicleComplete(response) {
-            return response.data;
+            var i = 0;
+            return response.data.VehicleMakeView;
         }
         function getVehicleError(error) {
+            var j = 0;
             logger.error('Error' + error.data);
         }
     }
