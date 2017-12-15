@@ -16,18 +16,20 @@ function dataservice($http, logger) {
     };
     return service;
 
-    function getVehicle() {
-    
+    function getVehicle(pageIndex, pageSize, txtSearch, txtSort) {
+
         return $http.get('http://localhost:64407/api/vehicle?'
-            + 'pageIndex=' + 1
-            + '&pageSize=' + 11
-            + '&txtSearch=' + ''
-            + '&txtSort=' + 'name_desc')
+            + 'pageIndex=' + pageIndex
+            + '&pageSize=' + pageSize
+            + '&txtSearch=' + txtSearch
+            + '&txtSort=' + txtSort)
+
             .then(getVehicleComplete)
             .catch(getVehicleError);
 
         function getVehicleComplete(response) {
-            return response.data.VehicleMakeView;
+            //return response.data.VehicleMakeView;
+            return response.data;
         }
         function getVehicleError(error) {
             logger.error('Error' + error.data);
