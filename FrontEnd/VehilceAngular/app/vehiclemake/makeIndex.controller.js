@@ -14,14 +14,19 @@ function VehicleMakeController(dataservice, $scope) {
     function getVehicle() {
 
         var pageIndex = 0; //kreće od nule
-        var pageSize = 10;
+        var pageSize = 10; //pageSize
         var txtSearch = "";
         var txtSort = "name";
+
+        $scope.pagination = { current: 1 };
+
+        $scope.pageChanged = function (newPage) { getResultsPage(newPage); };
 
         return dataservice.getVehicle(pageIndex, pageSize, txtSearch, txtSort)
             .then(function (data) {
                 vm.vehicle = data.VehicleMakeView;
                 vm.countData = data.CountData;
+                vm.itemsPerPage = pageSize;
                 return vm.vehicle;
             });
     }

@@ -12,8 +12,8 @@ function dataservice($http, logger) {
         deleteVehicleId: deleteVehicleId,
         addVehicle: addVehicle,
         updateVehicleId: updateVehicleId
-
     };
+
     return service;
 
     function getVehicle(pageIndex, pageSize, txtSearch, txtSort) {
@@ -28,7 +28,6 @@ function dataservice($http, logger) {
             .catch(getVehicleError);
 
         function getVehicleComplete(response) {
-            //return response.data.VehicleMakeView;
             return response.data;
         }
         function getVehicleError(error) {

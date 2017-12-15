@@ -22,7 +22,8 @@
             </th>
         </tr>
         <tbody>
-            <tr ng-repeat="dat in vm.vehicle">
+            <!--<tr ng-repeat="dat in vm.vehicle">-->  
+            <tr dir-paginate="dat in vm.vehicle | itemsPerPage: vm.itemsPerPage"   total-items= "vm.countData"  current-page="pagination.current">
                 <td>{{dat.ID}}</td>
                 <td style="width:auto; padding-left:10px; padding-right:10px;">{{dat.Name}}</td>
                 <td style="width:auto; padding-left:10px; padding-right:10px;">{{dat.Abrv}}</td>
@@ -31,8 +32,17 @@
             </tr>
         </tbody>
     </table>
+    <br />
+
+    {{vm.usersPerPage}}
+    <br />
+    {{vm.countData}}
 
     <!-- pagination -->
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)">
 
+    </dir-pagination-controls>
+    
+    
 
 </div>
