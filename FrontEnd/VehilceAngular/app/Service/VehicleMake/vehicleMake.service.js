@@ -27,11 +27,9 @@ function dataservice($http, logger) {
             .catch(getVehicleError);
 
         function getVehicleComplete(response) {
-            var i = 0;
             return response.data.VehicleMakeView;
         }
         function getVehicleError(error) {
-            var j = 0;
             logger.error('Error' + error.data);
         }
     }
