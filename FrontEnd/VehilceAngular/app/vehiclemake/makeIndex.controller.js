@@ -8,6 +8,7 @@ function VehicleMakeController(dataservice, $scope) {
     var vm = this;
     vm.vehicle = [];
     vm.countData = 1;
+    vm.pageIndex = 0;
 
     getVehicle();
 
@@ -18,9 +19,38 @@ function VehicleMakeController(dataservice, $scope) {
         var txtSearch = "";
         var txtSort = "name";
 
+        $scope.search = function () {
+            $scope.pagingInfo.page = 1;
+            loadUsers();
+        };
+
+
+        $scope.search = function () {
+            $scope.pagingInfo.page = 1;
+            loadUsers();
+        };
+
+        $scope.sort = function (sortBy) {
+            if (sortBy === $scope.pagingInfo.sortBy) {
+                $scope.pagingInfo.reverse = !$scope.pagingInfo.reverse;
+            } else {
+                $scope.pagingInfo.sortBy = sortBy;
+                $scope.pagingInfo.reverse = false;
+            }
+            $scope.pagingInfo.page = 1;
+            loadUsers();
+        };
+
+        $scope.pageChanged = function (page) {
+            $scope.pagingInfo.page = page;
+            loadUsers();
+        };
+
+
+
         $scope.pagination = { current: 1 };
 
-        $scope.pageChanged = function (newPage) { getResultsPage(newPage); };
+
 
         return dataservice.getVehicle(pageIndex, pageSize, txtSearch, txtSort)
             .then(function (data) {
@@ -29,5 +59,7 @@ function VehicleMakeController(dataservice, $scope) {
                 vm.itemsPerPage = pageSize;
                 return vm.vehicle;
             });
+
+
     }
 }
