@@ -12,45 +12,67 @@ function VehicleMakeController(dataservice, $scope) {
 
     getVehicle();
 
+    //ubaceno
+    $scope.itemsPerPage = 5;
+    $scope.currentPage = 0;
+
+    $scope.range = function () {
+        var rangeSize = 4;
+        var ps = [];
+        var start;
+
+        start = $scope.currentPage;
+        if (start > $scope.pageCount() - rangeSize) {
+            start = $scope.pageCount() - rangeSize + 1;
+        }
+        for (var i = start; i < start + rangeSize; i++) {
+            ps.push(i);
+        }
+        return ps;
+    };
+    $scope.prevPage = function () {
+        if ($scope.currentPage > 0) {
+            $scope.currentPage--;
+        }
+        getVehicle();
+    };
+    $scope.DisablePrevPage = function () {
+        return $scope.currentPage === 0 ? "disabled" : "";
+    };
+    $scope.pageCount = function () {
+        return Math.ceil(vm.countData / $scope.itemsPerPage) - 1;
+    };
+    $scope.nextPage = function () {
+        if ($scope.currentPage < $scope.pageCount()) {
+            $scope.currentPage++;
+        }
+        getVehicle();
+    };
+    $scope.DisableNextPage = function () {
+        return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
+    };
+    $scope.setPage = function (n) {
+        $scope.currentPage = n;
+        getVehicle();
+    };
+
+    $scope.sort = function (sortBy) {
+        if (sortBy === $scope.sortBy) {
+            $scope.reverse = !$scope.reverse;
+        } else {
+            $scope.sortBy = sortBy;
+            $scope.reverse = false;
+        }
+        $scope.currentPage = 1;
+        getVehicle();
+    };
+
     function getVehicle() {
 
-        var pageIndex = 0; //kreće od nule
-        var pageSize = 10; //pageSize
-        var txtSearch = "";
-        var txtSort = "name";
-
-        $scope.search = function () {
-            $scope.pagingInfo.page = 1;
-            loadUsers();
-        };
-
-
-        $scope.search = function () {
-            $scope.pagingInfo.page = 1;
-            loadUsers();
-        };
-
-        $scope.sort = function (sortBy) {
-            if (sortBy === $scope.pagingInfo.sortBy) {
-                $scope.pagingInfo.reverse = !$scope.pagingInfo.reverse;
-            } else {
-                $scope.pagingInfo.sortBy = sortBy;
-                $scope.pagingInfo.reverse = false;
-            }
-            $scope.pagingInfo.page = 1;
-            loadUsers();
-        };
-
-        $scope.pageChanged = function (page) {
-            $scope.pagingInfo.page = page;
-            loadUsers();
-        };
-
-
-
-        $scope.pagination = { current: 1 };
-
-
+        var pageIndex = $scope.currentPage; //kreće od nule
+        var pageSize = $scope.itemsPerPage;  //5; //pageSize
+        var txtSearch = ""; //search
+        var txtSort = $scope.sortBy; //sort
 
         return dataservice.getVehicle(pageIndex, pageSize, txtSearch, txtSort)
             .then(function (data) {
@@ -59,7 +81,5 @@ function VehicleMakeController(dataservice, $scope) {
                 vm.itemsPerPage = pageSize;
                 return vm.vehicle;
             });
-
-
     }
 }

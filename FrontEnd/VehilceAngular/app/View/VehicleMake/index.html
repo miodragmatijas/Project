@@ -13,14 +13,12 @@
         <thead>
             <tr>
                 <th><a href="" ng-click="sort('ID')">ID</a></th>
-                <th><a href="" ng-click="sort('Name')">Name</a></th>
-                <th><a href="" ng-click="sort('Abrv')">Abrv</a></th>
+                <th><a href="" ng-click="sort('name')">Name</a></th>
+                <th><a href="" ng-click="sort('abrv')">Abrv</a></th>
             </tr>
         </thead>
         <tbody>
-            <tr dir-paginate="dat in vm.vehicle | itemsPerPage: 5" total-items="50">
-            
-
+            <tr ng-repeat="dat in vm.vehicle">
                 <td>{{dat.ID}}</td>
                 <td>{{dat.Name}}</td>
                 <td>{{dat.Abrv}}</td>
@@ -31,11 +29,20 @@
     </table>
     <br />
 
-    <!-- pagination -->   
-    <dir-pagination-controls 
-                             direction-links="true"
-                             boundary-links="true"
-                             on-page-change="pageChanged(newPageNumber)">
-    </dir-pagination-controls>
+    <!-- pagination -->
+    <ul class="pagination">
+        <li ng-class="DisablePrevPage()">
+            <a href="#vehicleMake" ng-click="prevPage()">« Prev</a>            
+        </li>
+
+        <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+            <a href="#vehicleMake">{{n+1}}</a>
+        </li>
+
+        <li ng-class="DisableNextPage()">
+            <a href="#vehicleMake" ng-click="nextPage()">Next »</a>
+
+        </li>
+    </ul>
 
 </div>

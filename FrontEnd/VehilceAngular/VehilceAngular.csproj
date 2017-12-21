@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\logger.js" />
+    <Content Include="app\vehicle.css" />
     <Content Include="app\vehiclemake\makeDelete.controller.js" />
     <None Include="packages.config" />
     <Content Include="app\app.routes.js" />
@@ -77,7 +78,6 @@
     <Content Include="app\View\VehicleMake\details.html" />
     <Content Include="app\View\VehicleMake\edit.html" />
     <Content Include="app\View\VehicleMake\index.html" />
-    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="index.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -104,14 +104,8 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\dirPagination.js" />
-    <Content Include="Scripts\dirPagination.tpl.html" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />

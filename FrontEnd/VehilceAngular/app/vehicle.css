@@ -1,0 +1,19 @@
+﻿ul.pagination li a {
+        font-size: 18px;
+        float: left;
+        cursor: pointer;
+        border: 1px solid #ddd;
+        text-decoration: none;
+}
+
+ul.pagination li {
+    display: inline-block;
+}
+
+ul.pagination a {
+    padding: 10px;
+}
+
+ul.pagination .active {
+    background-color: #ff0;
+}
