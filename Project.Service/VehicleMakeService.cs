@@ -42,6 +42,18 @@ namespace Project.Service
                 case "name_desc":
                     data = data.OrderByDescending(s => s.Name).ToList();
                     break;
+                case "abrv":
+                    data = data.OrderBy(s => s.Abrv).ToList();
+                    break;
+                case "abrv_desc":
+                    data = data.OrderByDescending(s => s.Abrv).ToList();
+                    break;
+                case "ID":
+                    data = data.OrderBy(s => s.ID).ToList();
+                    break;
+                case "ID_desc":
+                    data = data.OrderByDescending(s => s.ID).ToList();
+                    break;
                 default:
                     data = data.OrderBy(s => s.Name).ToList();
                     break;

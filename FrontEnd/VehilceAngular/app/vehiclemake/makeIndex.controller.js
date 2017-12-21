@@ -63,7 +63,8 @@ function VehicleMakeController(dataservice, $scope) {
             $scope.sortBy = sortBy;
             $scope.reverse = false;
         }
-        $scope.currentPage = 1;
+        if ($scope.reverse == true) { $scope.sortBy = $scope.sortBy + "_desc" };
+        $scope.currentPage = 0;
         getVehicle();
     };
 
