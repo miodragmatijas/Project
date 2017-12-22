@@ -28,14 +28,14 @@ namespace WebAPI.Controllers
             if (txtSearch == null) { txtSearch = ""; };
             if (txtSort == null) { txtSearch = ""; };
 
-            var vehicle = await _VehicleMakeService.GetAll(pageIndex, pageSize, txtSearch, txtSort);
+            var vehicles = await _VehicleMakeService.GetAll(pageIndex, pageSize, txtSearch, txtSort);
 
-            var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeView>>(vehicle.Item1);
+            var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakesView>>(vehicles.Item1);
 
             VehiclePaged vehiclePaged = new VehiclePaged
             {
-                CountData = vehicle.Item2,
-                VehicleMakeView = model
+                CountData = vehicles.Item2,
+                VehicleMakesView = model
             };
 
             return Request.CreateResponse(HttpStatusCode.OK, vehiclePaged);
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         public async Task<HttpResponseMessage> GetId(int id)
         {
             var vehicle = await _VehicleMakeService.FindById(id);
-            var model = AutoMapper.Mapper.Map<VehicleMakeView>(vehicle);
+            var model = AutoMapper.Mapper.Map<VehicleMakesView>(vehicle);
             return Request.CreateResponse(HttpStatusCode.OK, model);
         }
 
@@ -61,19 +61,19 @@ namespace WebAPI.Controllers
         // POST: api/Vehicle
         [HttpPost]
         //[Route("add")]
-        public async Task<HttpResponseMessage> Add([FromBody] VehicleMakeView vehicleMakeView)
+        public async Task<HttpResponseMessage> Add([FromBody] VehicleMakesView vehicleMakesView)
         {
 
-            var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakeView);
+            var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakesView);
             var response = await _VehicleMakeService.Add(model);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // PUT: api/Vehicle/5
         [HttpPut]
-        public async Task<HttpResponseMessage> Update([FromBody] VehicleMakeView vehicleMakeView)
+        public async Task<HttpResponseMessage> Update([FromBody] VehicleMakesView vehicleMakesView)
         {
-            var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakeView);
+            var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakesView);
             var response = await _VehicleMakeService.Update(model);
             return Request.CreateResponse(HttpStatusCode.OK);
         }

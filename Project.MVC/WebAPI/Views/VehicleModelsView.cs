@@ -5,13 +5,13 @@ using System.Web;
 
 namespace WebAPI.Views
 {
-    public class VehicleModelView
+    public class VehicleModelsView
     {
         public int ID { get; set; }
         public int MakeId { get; set; }
         public string Name { get; set; }
         public string Abrv { get; set; }
 
-        public virtual VehicleMakeView VehicleMake { get; set; }
+        public virtual VehicleMakesView VehicleMake { get; set; }
     }
 }

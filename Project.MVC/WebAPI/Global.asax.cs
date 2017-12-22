@@ -29,7 +29,7 @@ namespace WebAPI
             Mapper.Initialize(config: cfg => {
 
                 cfg.CreateMap<VehicleMake, IVehicleMake>();   
-                cfg.CreateMap<VehicleMakeView, IVehicleMake>();
+                cfg.CreateMap<VehicleMakesView, IVehicleMake>();
                 cfg.CreateMap<VehicleModel, IVehicleModel>();
 
             });
