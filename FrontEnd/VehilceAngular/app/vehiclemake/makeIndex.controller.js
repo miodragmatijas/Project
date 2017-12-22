@@ -10,9 +10,8 @@ function VehicleMakeController(dataservice, $scope) {
     vm.countData = 1;
     vm.pageIndex = 0;
 
-    getVehicle();
+    
 
-    //ubaceno
     $scope.itemsPerPage = 5;
     $scope.currentPage = 0;
 
@@ -68,12 +67,14 @@ function VehicleMakeController(dataservice, $scope) {
         getVehicle();
     };
 
+    getVehicle();
+
     function getVehicle() {
 
-        var pageIndex = $scope.currentPage; //kreće od nule
-        var pageSize = $scope.itemsPerPage;  //5; //pageSize
+        var pageIndex = $scope.currentPage;
+        var pageSize = $scope.itemsPerPage;
         var txtSearch = ""; //search
-        var txtSort = $scope.sortBy; //sort
+        var txtSort = $scope.sortBy;
 
         return dataservice.getVehicle(pageIndex, pageSize, txtSearch, txtSort)
             .then(function (data) {
