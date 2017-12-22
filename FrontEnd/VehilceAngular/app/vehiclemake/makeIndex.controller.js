@@ -43,7 +43,7 @@ function VehicleMakeController(dataservice, $scope) {
         return $scope.currentPage === 0 ? "disabled" : "";
     };
     $scope.pageCount = function () {
-        return Math.ceil(vm.countData / $scope.itemsPerPage) ;
+        return Math.ceil(vm.countData / $scope.itemsPerPage)-1 ;
     };
     $scope.nextPage = function () {
         if ($scope.currentPage < $scope.pageCount()) {
