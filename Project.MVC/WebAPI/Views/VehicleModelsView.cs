@@ -12,6 +12,6 @@ namespace WebAPI.Views
         public string Name { get; set; }
         public string Abrv { get; set; }
 
-        public virtual VehicleMakesView VehicleMake { get; set; }
+        public virtual VehicleMakes VehicleMake { get; set; }
     }
 }

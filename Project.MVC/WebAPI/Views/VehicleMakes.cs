@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebAPI.Views
 {
-    public class VehicleMakesView
+    public class VehicleMakes
     {
         #region Properties
         public int ID { get; set; }
@@ -20,6 +20,6 @@ namespace WebAPI.Views
     public class VehiclePaged
     {
         public int CountData { get; set; }
-        public IEnumerable<VehicleMakesView> VehicleMakesView { get; set; }
+        public IEnumerable<VehicleMakes> VehicleMakes { get; set; }
     }
 }

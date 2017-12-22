@@ -84,7 +84,7 @@ function VehicleMakeController(dataservice, $scope) {
 
         return dataservice.getVehicle(pageIndex, pageSize, txtSearch, txtSort)
             .then(function (data) {
-                vm.vehicle = data.VehicleMakeView;
+                vm.vehicle = data.VehicleMakes;
                 vm.countData = data.CountData;
                 vm.itemsPerPage = pageSize;
                 return vm.vehicle;
