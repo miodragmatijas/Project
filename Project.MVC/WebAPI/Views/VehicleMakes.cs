@@ -13,7 +13,7 @@ namespace WebAPI.Views
          public string Abrv { get; set; }
         //public int countData { get; set; }
 
-         ICollection<VehicleModelsView> VehicleModels { get; set; }
+         ICollection<VehicleModels> VehicleModels { get; set; }
         #endregion Properties
     }
 

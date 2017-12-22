@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebAPI.Views
 {
-    public class VehicleModelsView
+    public class VehicleModels
     {
         public int ID { get; set; }
         public int MakeId { get; set; }

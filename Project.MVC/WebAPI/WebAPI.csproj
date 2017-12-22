@@ -215,7 +215,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\VehicleMakes.cs" />
-    <Compile Include="Views\VehicleModelsView.cs" />
+    <Compile Include="Views\VehicleModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

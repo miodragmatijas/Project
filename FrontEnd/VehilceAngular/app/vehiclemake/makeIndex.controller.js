@@ -32,6 +32,7 @@ function VehicleMakeController(dataservice, $scope) {
         }
         return ps;
     };
+
     $scope.prevPage = function () {
         if ($scope.currentPage > 0) {
             $scope.currentPage--;
