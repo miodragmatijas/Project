@@ -29,11 +29,12 @@ function MakeEditController(dataservice, $scope, $routeParams, $window, $locatio
         function updateVehicle() {
          
             var obj = {
+                ID: $routeParams.ID,
                 Name: $scope.Name,
                 Abrv: $scope.Abrv
             };
 
-            return dataservice.updateVehicleId($routeParams.ID, obj)
+            return dataservice.updateVehicleId(obj)
             .then(function () {
                 msg = "Item " + $routeParams.ID + " is Updated!!!";
                 $window.alert(msg);

@@ -71,8 +71,8 @@ function dataservice($http, logger) {
         }
     }
 
-    function updateVehicleId(id, obj) {
-        return $http.put('http://localhost:64407/api/vehicle/' + id, obj)
+    function updateVehicleId(obj) {
+        return $http.put('http://localhost:64407/api/vehicle/', obj)
             .then(getVehicleComplete)
             .catch(getVehicleError);
         function getVehicleComplete(response) {

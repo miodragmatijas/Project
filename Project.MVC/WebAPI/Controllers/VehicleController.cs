@@ -23,10 +23,10 @@ namespace WebAPI.Controllers
 
         // GET: api/Vehicle
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAsync(int pageIndex, int pageSize , string txtSearch, string txtSort)
+        public async Task<HttpResponseMessage> GetAsync(int pageIndex, int pageSize, string txtSearch, string txtSort)
         {
             if (txtSearch == null) { txtSearch = ""; };
-            if (txtSort == null) { txtSearch = ""; }; 
+            if (txtSort == null) { txtSearch = ""; };
 
             var vehicle = await _VehicleMakeService.GetAll(pageIndex, pageSize, txtSearch, txtSort);
 
@@ -71,9 +71,8 @@ namespace WebAPI.Controllers
 
         // PUT: api/Vehicle/5
         [HttpPut]
-        public async Task<HttpResponseMessage> Update(int id, [FromBody]VehicleMakeView vehicleMakeView)
+        public async Task<HttpResponseMessage> Update([FromBody] VehicleMakeView vehicleMakeView)
         {
-            vehicleMakeView.ID = id;
             var model = AutoMapper.Mapper.Map<IVehicleMake>(vehicleMakeView);
             var response = await _VehicleMakeService.Update(model);
             return Request.CreateResponse(HttpStatusCode.OK);
