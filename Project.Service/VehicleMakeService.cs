@@ -31,10 +31,10 @@ namespace Project.Service
         {
             var model = await Repository.GetAll<VehicleMake>();
 
-            int dataCount = model.Count();
+            
 
             var data = from d in model
-                       where d.Name.Contains(txtSearch) || d.Abrv.Contains(txtSearch)
+                       where d.Name.ToLower().Contains(txtSearch.ToLower()) || d.Abrv.ToLower().Contains(txtSearch.ToLower())
                        select d;
 
             switch (txtSort)
@@ -59,8 +59,10 @@ namespace Project.Service
                     break;
             }
 
-            data = data.ToPagedList(pageIndex, pageSize);
+            int dataCount = data.Count();
 
+            data = data.ToPagedList(pageIndex, pageSize);
+            
             var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(data);
 
 

@@ -10,20 +10,23 @@ function VehicleMakeController(dataservice, $scope) {
     vm.countData = 1;
     vm.pageIndex = 0;
 
-    
-
     $scope.itemsPerPage = 5;
     $scope.currentPage = 0;
+    $scope.txtSearch = "";
+    $scope.txtSort = "name";
 
     $scope.range = function () {
         var rangeSize = 4;
         var ps = [];
         var start;
 
+        //pogledati kada je pageCount < rangeSize
         start = $scope.currentPage;
         if (start > $scope.pageCount() - rangeSize) {
             start = $scope.pageCount() - rangeSize + 1;
         }
+        var j = $scope.pageCount();   // greska
+        
         for (var i = start; i < start + rangeSize; i++) {
             ps.push(i);
         }
@@ -39,7 +42,7 @@ function VehicleMakeController(dataservice, $scope) {
         return $scope.currentPage === 0 ? "disabled" : "";
     };
     $scope.pageCount = function () {
-        return Math.ceil(vm.countData / $scope.itemsPerPage) - 1;
+        return Math.ceil(vm.countData / $scope.itemsPerPage) ;
     };
     $scope.nextPage = function () {
         if ($scope.currentPage < $scope.pageCount()) {
@@ -54,7 +57,6 @@ function VehicleMakeController(dataservice, $scope) {
         $scope.currentPage = n;
         getVehicle();
     };
-
     $scope.sort = function (sortBy) {
         if (sortBy === $scope.sortBy) {
             $scope.reverse = !$scope.reverse;
@@ -66,6 +68,10 @@ function VehicleMakeController(dataservice, $scope) {
         $scope.currentPage = 0;
         getVehicle();
     };
+    $scope.search = function () {
+        $scope.currentPage = 0;
+        getVehicle();
+    };
 
     getVehicle();
 
@@ -73,7 +79,7 @@ function VehicleMakeController(dataservice, $scope) {
 
         var pageIndex = $scope.currentPage;
         var pageSize = $scope.itemsPerPage;
-        var txtSearch = ""; //search
+        var txtSearch = $scope.txtSearch;  // ""; //search
         var txtSort = $scope.sortBy;
 
         return dataservice.getVehicle(pageIndex, pageSize, txtSearch, txtSort)

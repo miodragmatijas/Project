@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         public async Task<HttpResponseMessage> GetAsync(int pageIndex, int pageSize , string txtSearch, string txtSort)
         {
             if (txtSearch == null) { txtSearch = ""; };
-            //string txtSort = "name";
+            if (txtSort == null) { txtSearch = ""; }; 
 
             var vehicle = await _VehicleMakeService.GetAll(pageIndex, pageSize, txtSearch, txtSort);
 
