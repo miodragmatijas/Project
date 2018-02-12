@@ -30,13 +30,18 @@ namespace WebAPI.Controllers
 
             var vehicles = await _VehicleMakeService.GetOnePageData(pageIndex, pageSize, txtSearch, txtSort);
 
-            var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakes>>(vehicles);
+            var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakes>>(vehicles);         
 
             VehiclePaged vehiclePaged = new VehiclePaged
             {
+
                 CountData = 100,
+
                 VehicleMakes = model
+
+                //Ovdije postaviti
             };
+
 
             return Request.CreateResponse(HttpStatusCode.OK, vehiclePaged);
         }
