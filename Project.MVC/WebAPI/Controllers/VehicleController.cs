@@ -28,13 +28,13 @@ namespace WebAPI.Controllers
             if (txtSearch == null) { txtSearch = ""; };
             if (txtSort == null) { txtSearch = ""; };
 
-            var vehicles = await _VehicleMakeService.GetPagingData(pageIndex, pageSize, txtSearch, txtSort);
+            var vehicles = await _VehicleMakeService.GetOnePageData(pageIndex, pageSize, txtSearch, txtSort);
 
             var model = AutoMapper.Mapper.Map<IEnumerable<VehicleMakes>>(vehicles);
 
             VehiclePaged vehiclePaged = new VehiclePaged
             {
-                //CountData = vehicles.Item2,  ukupni broj filtriranih podataka
+                CountData = 10,
                 VehicleMakes = model
             };
 

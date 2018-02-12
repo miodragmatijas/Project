@@ -27,11 +27,9 @@ namespace Project.Service
 
         #region Metodhs
 
-        public async Task<IEnumerable<IVehicleMake>> GetPagingData(int pageIndex, int pageSize, string txtSearch, string txtSort)
+        public async Task<IEnumerable<IVehicleMake>> GetOnePageData(int pageIndex, int pageSize, string txtSearch, string txtSort)
         {
-            var model = await Repository.GetAll<VehicleMake>();
-
-            
+            var model = await Repository.GetAll<VehicleMake>();            
 
             var data = from d in model
                        where d.Name.Contains(txtSearch) || d.Abrv.Contains(txtSearch)
@@ -57,15 +55,11 @@ namespace Project.Service
                 default:
                     data = data.OrderBy(s => s.Name).ToList();
                     break;
-            }
-
-            int datacount = data.Count();
-
+            }           
 
             data = data.ToPagedList(pageIndex, pageSize);
             
             var dataVehicle = AutoMapper.Mapper.Map<IEnumerable<IVehicleMake>>(data);
-
 
             return dataVehicle;
         }
