@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
 
             VehiclePaged vehiclePaged = new VehiclePaged
             {
-                CountData = 10,
+                CountData = 100,
                 VehicleMakes = model
             };
 
