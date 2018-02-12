@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
 
                 VehicleMakes = model
 
-                //Ovdije postaviti
+                //Ovdije postaviti - pogledati na starni angulara
             };
 
 
