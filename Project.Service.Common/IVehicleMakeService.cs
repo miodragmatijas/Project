@@ -10,7 +10,7 @@ namespace Project.Service.Common
 {
     public interface IVehicleMakeService
     {
-        Task<Tuple<IEnumerable<IVehicleMake>,int>> GetAll(int pageIndex, int pageSize, string txtSearch, string txtSort);
+        Task<IEnumerable<IVehicleMake>> GetPagingData(int pageIndex, int pageSize, string txtSearch, string txtSort);
         Task<IVehicleMake> FindById(int id);
         Task<int> Delete(int id);
         Task<int> Add(IVehicleMake data);
