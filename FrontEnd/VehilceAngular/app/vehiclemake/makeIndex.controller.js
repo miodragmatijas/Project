@@ -26,7 +26,7 @@ function VehicleMakeController(dataservice, $scope) {
             start = $scope.pageCount() - rangeSize + 1;
         }
         var j = $scope.pageCount();   // greska
-        
+
         for (var i = start; i < start + rangeSize; i++) {
             ps.push(i);
         }
@@ -43,7 +43,7 @@ function VehicleMakeController(dataservice, $scope) {
         return $scope.currentPage === 0 ? "disabled" : "";
     };
     $scope.pageCount = function () {
-        return Math.ceil(vm.countData / $scope.itemsPerPage)-1;
+        return Math.ceil(vm.countData / $scope.itemsPerPage) - 1;
     };
     $scope.nextPage = function () {
         if ($scope.currentPage < $scope.pageCount()) {
@@ -85,8 +85,11 @@ function VehicleMakeController(dataservice, $scope) {
 
         return dataservice.getVehicle(pageIndex, pageSize, txtSearch, txtSort)
             .then(function (data) {
-                vm.vehicle. = data.VehicleMakes;
-                vm.countData = 1000;
+                vm.vehicle = data.VehicleMakes;
+
+                if (Object.keys(vm.vehicle).length === 0) { vm.countData = pageIndex * pageSize;}
+                else { vm.countData = 1000; }
+
                 vm.itemsPerPage = pageSize;
                 return vm.vehicle;
             });
