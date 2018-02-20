@@ -19,7 +19,8 @@ namespace WebAPI.Views
 
     public class VehiclePaged
     {
-        public int CountData { get; set; }
+        //public int CountData { get; set; }
+
         public IEnumerable<VehicleMakes> VehicleMakes { get; set; }
     }
 }

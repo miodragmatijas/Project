@@ -35,11 +35,11 @@ namespace WebAPI.Controllers
             VehiclePaged vehiclePaged = new VehiclePaged
             {
 
-                CountData = 100,
+                
 
                 VehicleMakes = model
 
-                //Ovdije postaviti - pogledati na starni angulara
+                
             };
 
 
